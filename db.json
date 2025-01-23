@@ -8,7 +8,7 @@
       "checkOut": "2025-01-29",
       "guests": 1,
       "roomType": "Single",
-      "status": "pending"
+      "status": "cancelled"
     },
     {
       "id": "0f0b",
@@ -18,7 +18,7 @@
       "checkOut": "2025-01-29",
       "guests": 1,
       "roomType": "Single",
-      "status": "pending"
+      "status": "approved"
     },
     {
       "id": "6a66",
@@ -28,7 +28,7 @@
       "checkOut": "2025-01-29",
       "guests": 1,
       "roomType": "Single",
-      "status": "pending"
+      "status": "approved"
     },
     {
       "id": "e91b",
@@ -39,16 +39,6 @@
       "guests": 1,
       "roomType": "Double",
       "status": "pending"
-    },
-    {
-      "id": "55f8",
-      "hotel": "lkj",
-      "username": "1748258@tedata.net.eg",
-      "checkIn": "2025-01-24",
-      "checkOut": "2025-01-29",
-      "guests": 1,
-      "roomType": "Double",
-      "status": "cancelled"
     },
     {
       "id": "fe0f",
@@ -128,7 +118,7 @@
       "checkOut": "2025-01-27",
       "guests": "1",
       "roomType": "Single",
-      "status": "pending"
+      "status": "approved"
     },
     {
       "id": "c753",
