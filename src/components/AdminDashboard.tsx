@@ -64,144 +64,143 @@ const AdminDashboard = () => {
 
   return (
     <div className="container mx-auto py-8">
-      <div className="mb-6 flex justify-between">
-        <h1 className="text-2xl font-bold">Admin Dashboard</h1>
+  <div className="mb-6 flex justify-between items-center">
+    <h1 className="text-3xl font-bold text-white">Admin Dashboard</h1>
+    <Link
+      href="/admin/reservations"
+      className="bg-gradient-to-r from-blue-500 to-purple-600 text-white py-2 px-6 rounded-lg hover:from-blue-600 hover:to-purple-700 transition-all shadow-md"
+    >
+      + Add Reservation
+    </Link>
+  </div>
 
-        <Link
-          href="/admin/reservations"
-          className="bg-blue-500 text-white py-2 px-4 rounded"
-        >
-          + Add Reservation
-        </Link>
-      </div>
-      {loading ? (
-        <p>Loading...</p>
-      ) : reservations.length > 0 ? (
-        <table className="min-w-full bg-gray-700 shadow-md rounded text-center">
-          <thead>
-            <tr className="bg-red-500">
-              <th className="py-2 px-4">Reservation ID</th>
-              <th className="py-2 px-4">User</th>
-              <th className="py-2 px-4">Hotel</th>
-              <th className="py-2 px-4">Dates</th>
-              <th className="py-2 px-4">Status</th>
-              <th className="py-2 px-4">Actions</th>
+  {loading ? (
+    <p className="text-center text-gray-600">Loading...</p>
+  ) : reservations.length > 0 ? (
+    <div className="overflow-x-auto shadow-lg rounded-lg">
+      <table className="min-w-full bg-white rounded-lg overflow-hidden">
+        <thead className="bg-gradient-to-r from-blue-500 to-purple-600 text-white">
+          <tr>
+            <th className="py-3 px-6 text-left font-semibold">Reservation ID</th>
+            <th className="py-3 px-6 text-left font-semibold">User</th>
+            <th className="py-3 px-6 text-left font-semibold">Hotel</th>
+            <th className="py-3 px-6 text-left font-semibold">Dates</th>
+            <th className="py-3 px-6 text-left font-semibold">Status</th>
+            <th className="py-3 px-6 text-left font-semibold">Actions</th>
+          </tr>
+        </thead>
+        <tbody className="text-gray-700">
+          {reservations.map((reservation: any) => (
+            <tr
+              key={reservation.id}
+              className="border-b border-gray-200 hover:bg-gray-50 transition-all"
+            >
+              <td className="py-4 px-6">{reservation.id}</td>
+              <td className="py-4 px-6">{reservation.username}</td>
+              <td className="py-4 px-6">{reservation.hotel}</td>
+              <td className="py-4 px-6">
+                {reservation.checkIn} - {reservation.checkOut}
+              </td>
+              <td className="py-4 px-6">
+                <span
+                  className={`inline-block py-1 px-3 rounded-full text-sm font-semibold ${
+                    reservation.status === "cancelled"
+                      ? "bg-red-100 text-red-700"
+                      : reservation.status === "approved"
+                      ? "bg-green-100 text-green-700"
+                      : "bg-yellow-100 text-yellow-700"
+                  }`}
+                >
+                  {reservation.status}
+                </span>
+              </td>
+              <td className="py-4 px-6">
+                <div className="flex space-x-2">
+                  {reservation.status === "pending" && (
+                    <button
+                      onClick={() => {
+                        setModalOpen({
+                          id: reservation.id,
+                          target: "approved",
+                        });
+                      }}
+                      className="bg-green-500 text-white py-1 px-4 rounded-lg hover:bg-green-600 transition-all shadow-md"
+                    >
+                      Approve
+                    </button>
+                  )}
+                  {reservation.status === "pending" && (
+                    <button
+                      onClick={() => {
+                        setModalOpen({
+                          id: reservation.id,
+                          target: "cancelled",
+                        });
+                      }}
+                      className="bg-red-500 text-white py-1 px-4 rounded-lg hover:bg-red-600 transition-all shadow-md"
+                    >
+                      Cancel
+                    </button>
+                  )}
+                  {reservation.status !== "pending" && (
+                    <button
+                      onClick={() => {
+                        setModalOpen({
+                          id: reservation.id,
+                          target: "deleted",
+                        });
+                      }}
+                      className="bg-gray-500 text-white py-1 px-4 rounded-lg hover:bg-gray-600 transition-all shadow-md"
+                    >
+                      Delete
+                    </button>
+                  )}
+                </div>
+              </td>
             </tr>
-          </thead>
-          <tbody>
-            {reservations.map((reservation: any) => (
-              <tr key={reservation.id}>
-                <td className="py-2 px-4">{reservation.id}</td>
-                <td className="py-2 px-4">{reservation.username}</td>
-                <td className="py-2 px-4">{reservation.hotel}</td>
-                <td className="py-2 px-4">
-                  {reservation.checkIn} - {reservation.checkOut}
-                </td>
-                <td className="py-2 px-4">
-                  <span
-                    className={`border ${
-                      reservation.status === "cancelled"
-                        ? "border-red-500"
-                        : reservation.status === "approved"
-                        ? "border-green-500"
-                        : "border-yellow-500"
-                    } p-2 rounded-lg`}
-                  >
-                    {reservation.status}
-                  </span>
-                </td>
-                <td className="py-2 px-4">
-                  <div>
-                    {reservation.status === "pending" && (
-                      <button
-                        onClick={() => {
-                          setModalOpen({
-                            id: reservation.id,
-                            target: "approved",
-                          });
-                          /* handleUpdateReservation(reservation.id, "approved"); */
-                        }}
-                        className="bg-green-500 text-white py-1 px-3 rounded mr-2"
-                      >
-                        Approve
-                      </button>
-                    )}
-
-                    {reservation.status === "pending" && (
-                      <button
-                        onClick={() => {
-                          setModalOpen({
-                            id: reservation.id,
-                            target: "cancelled",
-                          });
-                          /* handleUpdateReservation(reservation.id, "cancelled"); */
-                        }}
-                        className="bg-red-500 text-white py-1 px-3 rounded"
-                      >
-                        Cancel
-                      </button>
-                    )}
-                    {reservation.status !== "pending" && (
-                      <button
-                        onClick={() => {
-                          setModalOpen({
-                            id: reservation.id,
-                            target: "deleted",
-                          });
-                          /* handleUpdateReservation(reservation.id, "deleted"); */
-                        }}
-                        className="bg-red-500 text-white py-1 px-3 rounded"
-                      >
-                        deleted
-                      </button>
-                    )}
-                  </div>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      ) : (
-        <p>No reservations found.</p>
-      )}
-
-      {modalOpen && (
-        <div className="fixed top-0 left-0 w-full h-full bg-gray-900 bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white p-10 rounded-2xl">
-            <h2 className="text-2xl font-bold mb-4 !text-black text-center">
-              {modalOpen === "cancelled"
-                ? "Approve Reservation"
-                : "Cancel Reservation"}
-            </h2>
-            <p className="mb-4 !text-black">
-              Are you sure you want to <span className="font-bold">{modalOpen?.target}</span> {" "}
-              {modalOpen === "cancelled" ? "approve" : "cancel"} this
-              reservation?
-            </p>
-            <div className="flex justify-center">
-              <button
-                onClick={() => setModalOpen(null)}
-                className="bg-gray-500 text-white py-2 px-4 mr-2 rounded"
-              >
-                Cancel
-              </button>
-              <button
-                onClick={() => {
-                  handleUpdateReservation(
-                    modalOpen.id,
-                    modalOpen.target 
-                  );
-                  setModalOpen(null);
-                }}
-                className="bg-blue-500 text-white py-2 px-4 rounded"
-              >
-                {modalOpen?.target}
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+          ))}
+        </tbody>
+      </table>
     </div>
+  ) : (
+    <p className="text-center text-gray-600">No reservations found.</p>
+  )}
+
+  {modalOpen && (
+    <div className="fixed top-0 left-0 w-full h-full bg-gray-900 bg-opacity-50 flex items-center justify-center z-50">
+      <div className="bg-white p-8 rounded-lg shadow-2xl max-w-md w-full">
+        <h2 className="text-2xl font-bold text-gray-800 mb-4 text-center">
+          {modalOpen.target === "approved"
+            ? "Approve Reservation"
+            : modalOpen.target === "cancelled"
+            ? "Cancel Reservation"
+            : "Delete Reservation"}
+        </h2>
+        <p className="text-gray-600 mb-6 text-center">
+          Are you sure you want to{" "}
+          <span className="font-bold">{modalOpen.target}</span> this reservation?
+        </p>
+        <div className="flex justify-center space-x-4">
+          <button
+            onClick={() => setModalOpen(null)}
+            className="bg-gray-500 text-white py-2 px-6 rounded-lg hover:bg-gray-600 transition-all shadow-md"
+          >
+            Cancel
+          </button>
+          <button
+            onClick={() => {
+              handleUpdateReservation(modalOpen.id, modalOpen.target);
+              setModalOpen(null);
+            }}
+            className="bg-blue-500 text-white py-2 px-6 rounded-lg hover:bg-blue-600 transition-all shadow-md"
+          >
+            Confirm
+          </button>
+        </div>
+      </div>
+    </div>
+  )}
+</div>
   );
 };
 

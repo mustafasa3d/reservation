@@ -1,98 +1,156 @@
-import { useState } from 'react';
+import { useState } from "react";
 
 const ReservationForm = ({ onSubmit }: { onSubmit: (data: any) => void }) => {
   const [formData, setFormData] = useState({
-    hotel: '',
-    username: '',
-    checkIn: '',
-    checkOut: '',
+    hotel: "",
+    username: "",
+    checkIn: "",
+    checkOut: "",
     guests: 1,
-    roomType: 'Single',
+    roomType: "Single",
   });
+  const [error, setError] = useState("");
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+    setError("");
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Form data:', formData);
+
+    // التحقق من اكتمال جميع الحقول
+    const requiredFields = [
+      "hotel",
+      "username",
+      "checkIn",
+      "checkOut",
+      "guests",
+    ];
+    const missingFields = requiredFields.filter((field) => !formData[field]);
+
+    if (missingFields.length > 0) {
+      setError("يرجى ملء جميع الحقول المطلوبة");
+      return;
+    }
+
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    const checkInDate = new Date(formData.checkIn);
+    const checkOutDate = new Date(formData.checkOut);
+
+    if (checkInDate < today) {
+      setError("لا يمكن حجز تاريخ في الماضي");
+      return;
+    }
+
+    if (checkOutDate <= checkInDate) {
+      setError("يجب أن يكون تاريخ المغادرة بعد تاريخ الوصول");
+      return;
+    }
+
+    // تنفيذ onSubmit فقط بعد التحقق الكامل
     onSubmit(formData);
   };
 
   return (
-    <form onSubmit={handleSubmit} className="p-4 bg-red-500 shadow-md rounded">
-      <div className="mb-4">
-        <label className="block font-bold">User Name</label>
+    <form
+      onSubmit={handleSubmit}
+      className="p-6 bg-gradient-to-r from-blue-50 to-purple-50 shadow-lg rounded-lg max-w-xl mx-auto"
+    >
+      <div className="mb-6">
+        <label className="block text-gray-700 font-semibold mb-2">
+          User Name
+        </label>
         <input
           type="text"
           name="username"
           value={formData.username}
           onChange={handleChange}
-          className="w-full border border-gray-300 p-2 rounded"
+          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all text-blue-900"
+          placeholder="User Name"
           required
         />
       </div>
-      <div className="mb-4">
-        <label className="block font-bold">Hotel</label>
+      <div className="mb-6">
+        <label className="block text-gray-700 font-semibold mb-2">Hotel</label>
         <input
           type="text"
           name="hotel"
           value={formData.hotel}
           onChange={handleChange}
-          className="w-full border border-gray-300 p-2 rounded"
+          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all text-blue-900"
+          placeholder="Hotel"
           required
         />
       </div>
-      <div className="mb-4 flex gap-5">
-        <div className='w-full'>
-          <label className="block font-bold">Check-In</label>
+      <div className="mb-6 flex gap-4">
+        <div className="w-full">
+          <label className="block text-gray-700 font-semibold mb-2">
+            Check-In
+          </label>
           <input
             type="date"
             name="checkIn"
             value={formData.checkIn}
             onChange={handleChange}
-            className="w-full border border-gray-300 p-2 rounded"
+            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all text-blue-900"
             required
           />
         </div>
-        <div className='w-full'>
-          <label className="block font-bold">Check-Out</label>
+        <div className="w-full">
+          <label className="block text-gray-700 font-semibold mb-2">
+            Check-Out
+          </label>
           <input
             type="date"
             name="checkOut"
             value={formData.checkOut}
             onChange={handleChange}
-            className="w-full border border-gray-300 p-2 rounded"
+            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all text-blue-900"
             required
           />
         </div>
       </div>
-      <div className="mb-4">
-        <label className="block font-bold">Number of Guests</label>
+      <div className="mb-6">
+        <label className="block text-gray-700 font-semibold mb-2">
+          Number of Guests
+        </label>
         <input
           type="number"
           name="guests"
           value={formData.guests}
           onChange={handleChange}
-          className="w-full border border-gray-300 p-2 rounded"
+          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all text-blue-900"
           required
         />
       </div>
-      <div className="mb-4">
-        <label className="block font-bold">Room Type</label>
+      <div className="mb-6">
+        <label className="block text-gray-700 font-semibold mb-2">
+          Room Type
+        </label>
         <select
           name="roomType"
           value={formData.roomType}
           onChange={handleChange}
-          className="w-full border border-gray-300 p-2 rounded"
+          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all text-blue-900"
         >
           <option value="Single">Single</option>
           <option value="Double">Double</option>
           <option value="Suite">Suite</option>
         </select>
       </div>
-      <button className="bg-blue-500 text-white py-2 px-4 rounded">Submit</button>
+
+      {error && (
+        <div className="mb-6 text-white bg-red-600 p-3 rounded-lg">{error}</div>
+      )}
+
+      <button className="w-full bg-gradient-to-r from-blue-500 to-purple-600 text-white py-3 px-6 rounded-lg hover:from-blue-600 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition-all">
+        Submit
+      </button>
     </form>
   );
 };
