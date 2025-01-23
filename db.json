@@ -21,16 +21,6 @@
       "status": "pending"
     },
     {
-      "id": "cc65",
-      "hotel": "Hotel 1",
-      "username": "1748258@tedata.net.eg",
-      "checkIn": "2025-01-23",
-      "checkOut": "2025-01-30",
-      "guests": 1,
-      "roomType": "Single",
-      "status": "pending"
-    },
-    {
       "id": "1cb1",
       "hotel": "Hotel 1",
       "username": "1748258@tedata.net.eg",
@@ -42,16 +32,6 @@
     },
     {
       "id": "0a88",
-      "hotel": "Hotel 1",
-      "username": "1748258@tedata.net.eg",
-      "checkIn": "2025-01-23",
-      "checkOut": "2025-01-24",
-      "guests": "-1",
-      "roomType": "Single",
-      "status": "pending"
-    },
-    {
-      "id": "707c",
       "hotel": "Hotel 1",
       "username": "1748258@tedata.net.eg",
       "checkIn": "2025-01-23",
@@ -73,14 +53,14 @@
   ],
   "login": [
     {
-      "id": 1,
+      "id": "1",
       "username": "admin",
       "password": "admin",
       "role": "admin",
       "token": "admin"
     },
     {
-      "id": 2,
+      "id": "2",
       "username": "user",
       "password": "user",
       "role": "user",
@@ -89,15 +69,15 @@
   ],
   "hotels": [
     {
-      "id": 11,
+      "id": "11",
       "name": "Hotel 1"
     },
     {
-      "id": 12,
+      "id": "12",
       "name": "Hotel 2"
     },
     {
-      "id": 13,
+      "id": "13",
       "name": "Hotel 3"
     }
   ]
