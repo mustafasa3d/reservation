@@ -1,0 +1,70 @@
+{
+  "reservations": [
+    {
+      "id": "a2ac",
+      "hotel": "Esse minus totam ve",
+      "username": "golom",
+      "checkIn": "1981-10-21",
+      "checkOut": "2001-03-24",
+      "guests": "9",
+      "roomType": "Single",
+      "status": "pending"
+    },
+    {
+      "id": "d17f",
+      "hotel": "Esse minus totam ve",
+      "username": "golom",
+      "checkIn": "1981-10-21",
+      "checkOut": "2001-03-24",
+      "guests": "9",
+      "roomType": "Single",
+      "status": "pending"
+    },
+    {
+      "id": "c55d",
+      "hotel": "Esse minus totam ve",
+      "username": "golom",
+      "checkIn": "1981-10-21",
+      "checkOut": "2001-03-24",
+      "guests": "9",
+      "roomType": "Single",
+      "status": "pending"
+    },
+    {
+      "id": "4718",
+      "hotel": "Esse minus totam ve",
+      "username": "golom",
+      "checkIn": "1981-10-21",
+      "checkOut": "2001-03-24",
+      "guests": "9",
+      "roomType": "Single",
+      "status": "pending"
+    },
+    {
+      "id": "db0e",
+      "hotel": "Esse minus totam ve",
+      "username": "golom",
+      "checkIn": "1981-10-21",
+      "checkOut": "2001-03-24",
+      "guests": "9",
+      "roomType": "Single",
+      "status": "pending"
+    }
+  ],
+  "login": [
+    {
+      "id": 1,
+      "username": "admin",
+      "password": "admin",
+      "role": "admin",
+      "token": "admin"
+    },
+    {
+      "id": 2,
+      "username": "user",
+      "password": "user",
+      "role": "user",
+      "token": "user"
+    }
+  ]
+}
