@@ -1,162 +1,72 @@
 {
   "reservations": [
     {
-      "id": "3689",
-      "hotel": "lkj",
+      "id": "2ac3",
+      "hotel": "Hotel 1",
       "username": "1748258@tedata.net.eg",
-      "checkIn": "2025-01-24",
-      "checkOut": "2025-01-29",
+      "checkIn": "2025-01-23",
+      "checkOut": "2025-01-30",
       "guests": 1,
       "roomType": "Single",
-      "status": "cancelled"
+      "status": "pending"
     },
     {
-      "id": "0f0b",
-      "hotel": "lkj",
+      "id": "8e23",
+      "hotel": "Hotel 2",
       "username": "1748258@tedata.net.eg",
-      "checkIn": "2025-01-24",
-      "checkOut": "2025-01-29",
+      "checkIn": "2025-01-23",
+      "checkOut": "2025-01-30",
       "guests": 1,
       "roomType": "Single",
-      "status": "approved"
+      "status": "pending"
     },
     {
-      "id": "6a66",
-      "hotel": "lkj",
+      "id": "cc65",
+      "hotel": "Hotel 1",
       "username": "1748258@tedata.net.eg",
-      "checkIn": "2025-01-24",
-      "checkOut": "2025-01-29",
+      "checkIn": "2025-01-23",
+      "checkOut": "2025-01-30",
       "guests": 1,
       "roomType": "Single",
-      "status": "approved"
-    },
-    {
-      "id": "e91b",
-      "hotel": "lkj",
-      "username": "1748258@tedata.net.eg",
-      "checkIn": "2025-01-24",
-      "checkOut": "2025-01-29",
-      "guests": 1,
-      "roomType": "Double",
       "status": "pending"
     },
     {
-      "id": "fe0f",
-      "hotel": "lkj",
-      "username": "1748258@tedata.net.eg",
-      "checkIn": "2025-01-24",
-      "checkOut": "2025-01-27",
-      "guests": "4",
-      "roomType": "Double",
-      "status": "pending"
-    },
-    {
-      "id": "a9d0",
-      "hotel": "lkj",
-      "username": "1748258@tedata.net.eg",
-      "checkIn": "2025-01-24",
-      "checkOut": "2025-01-27",
-      "guests": "4",
-      "roomType": "Double",
-      "status": "pending"
-    },
-    {
-      "id": "f1a2",
-      "hotel": "lkj",
-      "username": "1748258@tedata.net.eg",
-      "checkIn": "2025-01-24",
-      "checkOut": "2025-01-27",
-      "guests": "4",
-      "roomType": "Double",
-      "status": "pending"
-    },
-    {
-      "id": "3f6e",
-      "hotel": "lkj",
-      "username": "1748258@tedata.net.eg",
-      "checkIn": "2025-01-24",
-      "checkOut": "2025-01-27",
-      "guests": "4",
-      "roomType": "Double",
-      "status": "pending"
-    },
-    {
-      "id": "3809",
-      "hotel": "lkj",
-      "username": "1748258@tedata.net.eg",
-      "checkIn": "2025-01-24",
-      "checkOut": "2025-01-27",
-      "guests": "4",
-      "roomType": "Double",
-      "status": "pending"
-    },
-    {
-      "id": "44df",
-      "hotel": "lkj",
-      "username": "1748258@tedata.net.eg",
-      "checkIn": "2025-01-24",
-      "checkOut": "2025-01-27",
-      "guests": "2",
-      "roomType": "Double",
-      "status": "pending"
-    },
-    {
-      "id": "f69c",
-      "hotel": "lkj",
-      "username": "1748258@tedata.net.eg",
-      "checkIn": "2025-01-24",
-      "checkOut": "2025-01-27",
-      "guests": "1",
-      "roomType": "Double",
-      "status": "pending"
-    },
-    {
-      "id": "8b5d",
-      "hotel": "lkj",
-      "username": "1748258@tedata.net.eg",
-      "checkIn": "2025-01-24",
-      "checkOut": "2025-01-27",
-      "guests": "1",
-      "roomType": "Single",
-      "status": "approved"
-    },
-    {
-      "id": "c753",
-      "hotel": "Aute gfdbdsalxsanditiis temp",
+      "id": "1cb1",
+      "hotel": "Hotel 1",
       "username": "1748258@tedata.net.eg",
       "checkIn": "2025-01-23",
       "checkOut": "2025-01-24",
-      "guests": 1,
-      "roomType": "Single",
-      "status": "approved"
-    },
-    {
-      "id": "7dbb",
-      "hotel": "Aute gfdbdsalxsanditiis temp",
-      "username": "1748258@tedata.net.eg",
-      "checkIn": "2025-01-23",
-      "checkOut": "2025-01-24",
-      "guests": 1,
+      "guests": "-1",
       "roomType": "Single",
       "status": "pending"
     },
     {
-      "id": "0a5c",
-      "hotel": "Aute gfdbdsalxsanditiis temp",
+      "id": "0a88",
+      "hotel": "Hotel 1",
       "username": "1748258@tedata.net.eg",
       "checkIn": "2025-01-23",
       "checkOut": "2025-01-24",
-      "guests": 1,
+      "guests": "-1",
       "roomType": "Single",
       "status": "pending"
     },
     {
-      "id": "19e9",
-      "hotel": "Aute gfdbdsalxsanditiis temp",
+      "id": "707c",
+      "hotel": "Hotel 1",
       "username": "1748258@tedata.net.eg",
       "checkIn": "2025-01-23",
       "checkOut": "2025-01-24",
-      "guests": 1,
+      "guests": "-1",
+      "roomType": "Single",
+      "status": "pending"
+    },
+    {
+      "id": "35a8",
+      "hotel": "Hotel 1",
+      "username": "1748258@tedata.net.eg",
+      "checkIn": "2025-01-23",
+      "checkOut": "2025-01-24",
+      "guests": "-1",
       "roomType": "Single",
       "status": "pending"
     }
@@ -175,6 +85,20 @@
       "password": "user",
       "role": "user",
       "token": "user"
+    }
+  ],
+  "hotels": [
+    {
+      "id": 11,
+      "name": "Hotel 1"
+    },
+    {
+      "id": 12,
+      "name": "Hotel 2"
+    },
+    {
+      "id": 13,
+      "name": "Hotel 3"
     }
   ]
 }

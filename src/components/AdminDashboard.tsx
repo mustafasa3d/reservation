@@ -2,13 +2,15 @@
 
 import {
   deleteReservation,
+  fetchHotels,
   fetchReservations,
   updateReservation,
 } from "../utils/api/services";
+import { useEffect, useState } from "react";
 
 import Link from "next/link";
+import Select from "react-select"; // استيراد react-select
 import useAuth from "@/utils/hooks/UseAuth";
-import { useEffect, useState } from "react";
 
 const AdminDashboard = () => {
   useAuth("admin");
@@ -23,9 +25,19 @@ const AdminDashboard = () => {
     hotelName: "",
     userName: "",
   });
+  const [hotels, setHotels] = useState([]); // حالة لتخزين قائمة الفنادق
 
-  const handleFilterChange = (e) => {
-    const { name, value } = e.target;
+  async function getHotelsData() {
+    const data = await fetchHotels();
+    setHotels(data?.map((hotel) => ({ value: hotel.name, label: hotel.name })));
+    console.log("aaaaaaaaaaaaa", data);
+  }
+
+  useEffect(() => {
+    getHotelsData();
+  }, []);
+
+  const handleFilterChange = (name, value) => {
     setFilters((prevFilters) => ({
       ...prevFilters,
       [name]: value,
@@ -44,9 +56,9 @@ const AdminDashboard = () => {
     }
   };
 
-  useEffect(()=>{
-    handleSearch()
-  },[])
+  useEffect(() => {
+    handleSearch();
+  }, []);
 
   const handleUpdateReservation = async (id, status) => {
     setLoading(true);
@@ -92,8 +104,9 @@ const AdminDashboard = () => {
           <select
             name="status"
             value={filters.status}
-            onChange={handleFilterChange}
-            className="p-2 border rounded-lg"
+            onChange={(e) => handleFilterChange("status", e.target.value)}
+            placeholder="Status"
+            className="p-2 border rounded-lg text-black"
           >
             <option value="">All Statuses</option>
             <option value="pending">Pending</option>
@@ -104,31 +117,35 @@ const AdminDashboard = () => {
             type="date"
             name="startDate"
             value={filters.startDate}
-            onChange={handleFilterChange}
-            className="p-2 border rounded-lg"
+            onChange={(e) => handleFilterChange("startDate", e.target.value)}
+            placeholder="Start Date"
+            className="p-2 border rounded-lg text-black"
           />
           <input
             type="date"
             name="endDate"
             value={filters.endDate}
-            onChange={handleFilterChange}
-            className="p-2 border rounded-lg"
+            onChange={(e) => handleFilterChange("endDate", e.target.value)}
+            placeholder="End Date"
+            className="p-2 border rounded-lg text-black"
           />
-          <input
-            type="text"
-            name="hotelName"
-            value={filters.hotelName}
-            onChange={handleFilterChange}
-            placeholder="Hotel Name"
-            className="p-2 border rounded-lg"
+          <Select
+            options={hotels}
+            value={{ value: filters.hotelName, label: filters.hotelName }}
+            onChange={(selectedOption) =>
+              handleFilterChange("hotelName", selectedOption.value)
+            }
+            placeholder="Select Hotel"
+            className="react-select-container text-black"
+            classNamePrefix="react-select"
           />
           <input
             type="text"
             name="userName"
             value={filters.userName}
-            onChange={handleFilterChange}
+            onChange={(e) => handleFilterChange("userName", e.target.value)}
             placeholder="User Name"
-            className="p-2 border rounded-lg"
+            className="p-2 border rounded-lg text-black"
           />
           <button
             onClick={handleSearch}

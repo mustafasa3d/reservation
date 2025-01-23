@@ -1,4 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+
+import Select from "react-select";
+import { fetchHotels } from "@/utils/api/services";
 
 const ReservationForm = ({ onSubmit }: { onSubmit: (data: any) => void }) => {
   const [formData, setFormData] = useState({
@@ -10,6 +13,18 @@ const ReservationForm = ({ onSubmit }: { onSubmit: (data: any) => void }) => {
     roomType: "Single",
   });
   const [error, setError] = useState("");
+
+  const [hotels, setHotels] = useState([]); // حالة لتخزين قائمة الفنادق
+
+  async function getHotelsData() {
+    const data = await fetchHotels();
+    setHotels(data?.map((hotel) => ({ value: hotel.name, label: hotel.name })));
+    console.log("aaaaaaaaaaaaa", data);
+  }
+
+  useEffect(() => {
+    getHotelsData();
+  }, []);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -56,6 +71,10 @@ const ReservationForm = ({ onSubmit }: { onSubmit: (data: any) => void }) => {
     onSubmit(formData);
   };
 
+  const handleFilterChange = (item) => {
+    setFormData({ ...formData, hotel: item.value });
+  };
+
   return (
     <form
       onSubmit={handleSubmit}
@@ -76,7 +95,15 @@ const ReservationForm = ({ onSubmit }: { onSubmit: (data: any) => void }) => {
         />
       </div>
       <div className="mb-6">
-        <label className="block text-gray-700 font-semibold mb-2">Hotel</label>
+        <Select
+          options={hotels}
+          value={{ value: formData.hotel, label: formData.hotel }}
+          onChange={(selectedOption) => handleFilterChange(selectedOption)}
+          placeholder="Select Hotel"
+          className="react-select-container text-black"
+          classNamePrefix="react-select"
+        />
+        {/*  <label className="block text-gray-700 font-semibold mb-2">Hotel</label>
         <input
           type="text"
           name="hotel"
@@ -85,7 +112,7 @@ const ReservationForm = ({ onSubmit }: { onSubmit: (data: any) => void }) => {
           className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all text-blue-900"
           placeholder="Hotel"
           required
-        />
+        /> */}
       </div>
       <div className="mb-6 flex gap-4">
         <div className="w-full">

@@ -1,6 +1,20 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:3001/reservations";
+const API_URL = "http://localhost:3001";
+
+// إعداد interceptor لإضافة التوكن إلى كل الطلبات
+axios.interceptors.request.use(
+  (config) => {
+    const token = localStorage.getItem("token"); // جلب التوكن من localStorage
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`; // إضافة التوكن إلى رأس الطلب
+    }
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
 
 export const fetchReservations = async (filter) => {
   try {
@@ -14,7 +28,7 @@ export const fetchReservations = async (filter) => {
     if (filter.username) params.append("username", filter.userName);
 
     // إرسال الطلب مع query parameters
-    const response = await axios.get(`${API_URL}?${params.toString()}`);
+    const response = await axios.get(`${API_URL}/reservations?${params.toString()}`);
     return response.data;
   } catch (error) {
     console.error("Failed to fetch reservations:", error);
@@ -22,23 +36,27 @@ export const fetchReservations = async (filter) => {
   }
 };
 
-/* export const fetchReservations = async (filter) => {
-  const response = await axios.get(API_URL);
-  return response.data;
-}; */
+export const fetchHotels = async () => {
+  try {
+    // إرسال الطلب مع query parameters
+    const response = await axios.get(`${API_URL}/hotels`);
+    return response.data;
+  } catch (error) {
+    console.error("Failed to fetch reservations:", error);
+    throw error; // يمكنك التعامل مع الخطأ بشكل أفضل في الكود الذي يستدعي هذه الدالة
+  }
+};
 
-export const createReservation = async (reservation: any) => {
-  const response = await axios.post(API_URL, reservation);
+export const createReservation = async (reservation) => {
+  const response = await axios.post(`${API_URL}/reservations`, reservation);
   return response.data;
 };
 
-export const updateReservation = async (id: number, data: any) => {
-  const response = await axios.patch(`${API_URL}/${id}`, data);
+export const updateReservation = async (id, data) => {
+  const response = await axios.patch(`${API_URL}/reservations/${id}`, data);
   return response.data;
 };
 
-export const deleteReservation = async (id: number) => {
-  return await axios.delete(`${API_URL}/${id}`);
+export const deleteReservation = async (id) => {
+  return await axios.delete(`${API_URL}/reservations/${id}`);
 };
-
-
