@@ -8,7 +8,7 @@
       "checkOut": "2025-01-30",
       "guests": 1,
       "roomType": "Single",
-      "status": "pending"
+      "status": "approved"
     },
     {
       "id": "8e23",
@@ -18,7 +18,7 @@
       "checkOut": "2025-01-30",
       "guests": 1,
       "roomType": "Single",
-      "status": "pending"
+      "status": "approved"
     },
     {
       "id": "1cb1",
@@ -28,7 +28,7 @@
       "checkOut": "2025-01-24",
       "guests": "-1",
       "roomType": "Single",
-      "status": "pending"
+      "status": "cancelled"
     },
     {
       "id": "0a88",
