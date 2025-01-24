@@ -1,10 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react";
-
 import Loading from "../Loading";
 import { login } from "@/utils/api/services";
+import useAuthRedirect from "@/utils/hooks/UseAuthRedirect";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 const LoginForm = () => {
   const [username, setUsername] = useState<string>("");
@@ -13,28 +13,13 @@ const LoginForm = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const router = useRouter() as ReturnType<typeof useRouter>;
 
-  const handleLogin = async () => {
-    setLoading(true);
-    const user = await login({ username, password });
+  useAuthRedirect();
 
-    if (user) {
-      if (user.role === "admin") router.push("/admin");
-      if (user.role === "user") router.push("/user");
-      setLoading(false);
-    } else {
-      setError("Invalid username or password");
-      setLoading(false);
-    }
-    setLoading(false);
+  const handelSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const data = { username, password };
+    login(data, setLoading, setError, router);
   };
-
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    const role = localStorage.getItem("role");
-
-    if (token && role === "admin") router.push("/admin");
-    if (token && role === "user") router.push("/user");
-  }, []);
 
   if (loading) return <Loading />;
 
@@ -42,8 +27,7 @@ const LoginForm = () => {
     <div className="flex items-center justify-center h-screen bg-gradient-to-r from-gray-900 to-gray-700">
       <form
         onSubmit={(e) => {
-          e.preventDefault();
-          handleLogin();
+          handelSubmit(e);
         }}
         className="p-8 bg-white shadow-2xl rounded-lg max-w-md w-full"
       >

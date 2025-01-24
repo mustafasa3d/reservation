@@ -1,43 +1,30 @@
 "use client";
+
+import { Reservation, selectOption } from "@/types";
+import { createReservation, fetchHotels } from "@/utils/api/services";
 import { useEffect, useState } from "react";
 
+import Loading from "./Loading";
 import Select from "react-select";
-import { createReservation, fetchHotels } from "@/utils/api/services";
-import { Reservation, selectOption } from "@/types";
+
+const initFormData = {
+  hotel: "",
+  username: "",
+  checkIn: "",
+  checkOut: "",
+  guests: 1,
+  roomType: "Single",
+};
+
+/* required fields */
+const requiredFields = ["hotel", "username", "checkIn", "checkOut", "guests"];
 
 const ReservationForm = () => {
-  const [formData, setFormData] = useState({
-    hotel: "",
-    username: "",
-    checkIn: "",
-    checkOut: "",
-    guests: 1,
-    roomType: "Single",
-  });
+  const [formData, setFormData] = useState(initFormData);
   const [error, setError] = useState("");
-
   const [hotels, setHotels] = useState([] as selectOption[]); // حالة لتخزين قائمة الفنادق
-
   const [reservations, setReservations] = useState([] as Reservation[]);
   const [loading, setLoading] = useState(false);
-
-  console.log(reservations);
-  console.log(loading);
-
-  const handleCreateReservation = async (reservationData: any) => {
-    reservationData.status = "pending";
-    setLoading(true);
-    try {
-      const newReservation = await createReservation(reservationData);
-      setReservations(
-        (prev: Reservation[]) => [newReservation, ...prev] as Reservation[]
-      );
-    } catch (error) {
-      console.error("Failed to create reservation:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
 
   useEffect(() => {
     fetchHotels(setHotels);
@@ -53,14 +40,6 @@ const ReservationForm = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    // التحقق من اكتمال جميع الحقول
-    const requiredFields = [
-      "hotel",
-      "username",
-      "checkIn",
-      "checkOut",
-      "guests",
-    ];
     /* @ts-ignore */
     const missingFields = requiredFields.filter((field) => !formData[field]);
 
@@ -86,12 +65,17 @@ const ReservationForm = () => {
     }
 
     // تنفيذ onSubmit فقط بعد التحقق الكامل
-    handleCreateReservation(formData);
+    /* @ts-ignore */
+    formData.status = "pending";
+    /* @ts-ignore */
+    createReservation(formData, setReservations, setLoading);
   };
 
   const handleFilterChange = (item: any) => {
     setFormData({ ...formData, hotel: item.value });
   };
+
+  if (loading) return <Loading />;
 
   return (
     <form
@@ -126,16 +110,6 @@ const ReservationForm = () => {
           className="react-select-container text-black"
           classNamePrefix="react-select"
         />
-        {/*  <label className="block text-gray-700 font-semibold mb-2">Hotel</label>
-        <input
-          type="text"
-          name="hotel"
-          value={formData.hotel}
-          onChange={handleChange}
-          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all text-blue-900"
-          placeholder="Hotel"
-          required
-        /> */}
       </div>
       <div className="mb-6 flex gap-4">
         <div className="w-full">

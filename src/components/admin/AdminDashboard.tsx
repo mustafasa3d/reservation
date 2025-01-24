@@ -1,13 +1,14 @@
 "use client";
+
 import React, { useEffect, useState } from "react";
+import { Reservation, selectOption } from "@/types";
+import { fetchHotels, fetchReservations, handleUpdateReservation } from "../../utils/api/services";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+
 import Filters from "./Filters";
 import Table from "./Table";
-import { fetchHotels, fetchReservations } from "../../utils/api/services";
 import { filterReservationsByDates } from "@/utils/filterReservations";
-import { handleUpdateReservation } from "@/utils/handleReservationActions";
 import { initializeFilters } from "@/utils/initializeFilters";
-import { Reservation, selectOption } from "@/types";
 
 const defaultFilterValues = {
   status: "",

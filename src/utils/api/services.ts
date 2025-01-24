@@ -1,16 +1,15 @@
-import { hotel, Reservation, selectOption, userLogin,userData } from "@/types";
+import { Reservation, ReservationForm, hotel, selectOption, userData, userLogin } from "@/types";
+
 import axios from "axios";
 
 const API_URL = "http://localhost:3001";
 
-
-
-// إعداد interceptor لإضافة التوكن إلى كل الطلبات
+/* init axios and add token for all requests */
 axios.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem("token"); // جلب التوكن من localStorage
+    const token = localStorage.getItem("token");
     if (token) {
-      config.headers.Authorization = `Bearer ${token}`; // إضافة التوكن إلى رأس الطلب
+      config.headers.Authorization = `Bearer ${token}`;
     }
     return config;
   },
@@ -20,19 +19,15 @@ axios.interceptors.request.use(
 );
 
 export const fetchReservations = async (
-  searchParamsx: URLSearchParams,
+  searchParamsData: URLSearchParams,
   setReservations: React.Dispatch<React.SetStateAction<Reservation[]>>,
   setLoading: React.Dispatch<React.SetStateAction<boolean>>
 ) => {
   try {
     setLoading(true);
-    const searchParams = Object.fromEntries(searchParamsx.entries());
+    const searchParams = Object.fromEntries(searchParamsData.entries());
 
-    /* getData() */
-
-    /* setReservations(data); */
-
-    // بناء query parameters بناءً على الفلتر
+    /* create query parameters */
     const params = new URLSearchParams();
 
     if (searchParams?.status) params.append("status", searchParams.status);
@@ -42,25 +37,24 @@ export const fetchReservations = async (
     /* if (filter?.startDate) params.append("checkIn", filter.startDate); */
     /* if (filter?.endDate) params.append("checkOut", filter.endDate); */
 
-    // إرسال الطلب مع query parameters
     const response = await axios.get(
       `${API_URL}/reservations?${params.toString()}`
     );
     setReservations(response.data);
   } catch (error) {
     console.error("Failed to fetch reservations:", error);
-    throw error; // يمكنك التعامل مع الخطأ بشكل أفضل في الكود الذي يستدعي هذه الدالة
   } finally {
     setLoading(false);
   }
 };
 
-export const fetchHotels = async (setHotels: React.Dispatch<React.SetStateAction<selectOption[]>>) => {
+export const fetchHotels = async (
+  setHotels: React.Dispatch<React.SetStateAction<selectOption[]>>
+) => {
   try {
-    // إرسال الطلب مع query parameters
     const response = await axios.get(`${API_URL}/hotels`);
     if (response?.data) {
-      const allHotels = response?.data.map((hotel : hotel) => ({
+      const allHotels = response?.data.map((hotel: hotel) => ({
         value: hotel.name,
         label: hotel.name,
       }));
@@ -68,42 +62,45 @@ export const fetchHotels = async (setHotels: React.Dispatch<React.SetStateAction
     }
   } catch (error) {
     console.error("Failed to fetch reservations:", error);
-    throw error; // يمكنك التعامل مع الخطأ بشكل أفضل في الكود الذي يستدعي هذه الدالة
   }
 };
 
-export const createReservation = async (reservation: Reservation) => {
+/* () reservation */
+/* Reservation */
+export const createReservation = async (
+  reservationData: ReservationForm,
+  setReservations: React.Dispatch<React.SetStateAction<Reservation[]>>,
+  setLoading: React.Dispatch<React.SetStateAction<boolean>>
+) => {
+  
+  setLoading(true);
   try {
-    const response = await axios.post(`${API_URL}/reservations`, reservation);
-    return response.data;
+    /* const newReservation = await createReservation(reservationData); */
+    const newReservation = await axios.post(
+      `${API_URL}/reservations`,
+      reservationData
+    );
+
+    if (newReservation?.data) {
+      setReservations(
+        (prev: Reservation[]) =>
+          [newReservation?.data, ...prev] as Reservation[]
+      );
+    }
   } catch (error) {
     console.error("Failed to create reservation:", error);
-    throw error; // يمكنك التعامل مع الخطأ بشكل أفضل في الكود الذي يستدعي هذه الدالة
+  } finally {
+    setLoading(false);
   }
 };
 
-export const updateReservation = async (id: string, data : Reservation) => {
-  try {
-    const response = await axios.patch(`${API_URL}/reservations/${id}`, data);
-    return response.data;
-  } catch (error) {
-    console.error("Failed to update reservation:", error);
-    throw error; // يمكنك التعامل مع الخطأ بشكل أفضل في الكود الذي يستدعي هذه الدالة
-  }
-};
-
-export const deleteReservation = async (id: string) => {
-  try {
-    const response = await axios.delete(`${API_URL}/reservations/${id}`);
-    return response.data;
-  } catch (error) {
-    console.error("Failed to delete reservation:", error);
-    throw error; // يمكنك التعامل مع الخطأ بشكل أفضل في الكود الذي يستدعي هذه الدالة
-  }
-};
-
-export const login = async (data: userLogin) => {
-  /* setLoading(true); */
+export const login = async (
+  data: userLogin,
+  setLoading: React.Dispatch<React.SetStateAction<boolean>>,
+  setError: React.Dispatch<React.SetStateAction<string>>,
+  router: any
+) => {
+  setLoading(true);
   try {
     const { data: users } = await axios.get<userData[]>(`${API_URL}/login`);
 
@@ -114,14 +111,67 @@ export const login = async (data: userLogin) => {
     if (user) {
       localStorage.setItem("token", user.token);
       localStorage.setItem("role", user.role);
-      return user;
+
+      if (user.role === "admin") router.push("/admin");
+      if (user.role === "user") router.push("/user");
     } else {
+      setError("Invalid username or password");
       console.error("Error in login response: ?");
       return null;
-      /*  setError('Invalid username or password'); */
     }
   } catch (error) {
-    console.error("Failed to fetch reservations:", error);
+    setError("Failed Login");
+    console.error("Failed Login:", error);
     throw error;
+  } finally {
+    setLoading(false);
+  }
+};
+
+/* (approve | cancel | delete) reservation */
+export const handleUpdateReservation = async (
+  id: string,
+  status: string,
+  setReservations: React.Dispatch<React.SetStateAction<Reservation[]>>,
+  setLoading: React.Dispatch<React.SetStateAction<boolean>>,
+  message?: string
+) => {
+  setLoading(true);
+  try {
+    if (status === "deleted") {
+      /* if (status === 'deleted') */
+      const data = await axios.delete(`${API_URL}/reservations/${id}`);
+      if (data?.data?.id) {
+        setReservations((prev) =>
+          prev.filter((reservation) => reservation.id !== id)
+        );
+      }
+    } else {
+      /* if (status === 'cancelled' || status === 'approved') */
+      const DataToUpdate = { status: status, message: message || null };
+
+      const data = await axios.patch(
+        `${API_URL}/reservations/${id}`,
+        DataToUpdate
+      );
+
+      if (
+        data?.data?.status === "cancelled" ||
+        data?.data?.status === "approved"
+      ) {
+        setReservations(
+          (prev) =>
+            prev.map((reservation) =>
+              reservation.id === id
+                ? { ...reservation, status: status }
+                : reservation
+            ) as Reservation[]
+        );
+      }
+    }
+  } catch (error) {
+    console.error("Failed to update reservation:", error);
+  } finally {
+    setLoading(false);
   }
 };
