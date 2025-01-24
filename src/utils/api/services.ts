@@ -23,10 +23,10 @@ export const fetchReservations = async (filter) => {
     const params = new URLSearchParams();
 
     if (filter?.status) params.append("status", filter.status);
-    if (filter?.startDate) params.append("checkIn", filter.startDate);
-    if (filter?.endDate) params.append("checkOut", filter.endDate);
     if (filter?.hotelName) params.append("hotel", filter.hotelName);
     if (filter?.userName) params.append("username", filter.userName);
+    /* if (filter?.startDate) params.append("checkIn", filter.startDate); */
+    /* if (filter?.endDate) params.append("checkOut", filter.endDate); */
 
     // إرسال الطلب مع query parameters
     const response = await axios.get(`${API_URL}/reservations?${params.toString()}`);

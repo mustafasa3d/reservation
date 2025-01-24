@@ -100,7 +100,35 @@ const AdminDashboard = () => {
       setLoading(false);
     }
   };
-  
+
+  const filterReservationsByDates = (reservations) => {
+    const startDate = searchParams.get("startDate");
+    const endDate = searchParams.get("endDate");
+
+    if (!startDate && !endDate) return reservations;
+
+    if (startDate && !endDate)
+      return reservations.filter((reservation) => {
+        const checkIn = new Date(reservation.checkIn);
+        return checkIn >= new Date(startDate);
+      });
+
+    if (!startDate && endDate)
+      return reservations.filter((reservation) => {
+        const checkOut = new Date(reservation.checkOut);
+        return checkOut <= new Date(endDate);
+      });
+
+    return reservations.filter((reservation) => {
+      const checkIn = new Date(reservation.checkIn);
+      const checkOut = new Date(reservation.checkOut);
+
+      return checkIn >= new Date(startDate) && checkOut <= new Date(endDate);
+    });
+  };
+
+  const filteredReservations = filterReservationsByDates(reservations);
+
   const reset = () => {
     setTempFilters({
       status: "",
@@ -129,11 +157,8 @@ const AdminDashboard = () => {
     fetchData();
   }, [searchParams]);
 
-  // ... باقي الدوال بدون تغيير (handleUpdateReservation)
-
   return (
     <div className="container mx-auto py-8">
-      {/* ... باقي العناصر بدون تغيير حتى قسم الفلاتر */}
       <div className="mb-6 flex justify-between items-center">
         <h1 className="text-3xl font-bold text-white">Admin Dashboard</h1>
         <Link
@@ -232,7 +257,6 @@ const AdminDashboard = () => {
         </div>
       </div>
 
-      {/* ... باقي الكود بدون تغيير */}
       {loading ? (
         <p className="text-center text-gray-600">Loading...</p>
       ) : reservations.length > 0 ? (
@@ -251,7 +275,8 @@ const AdminDashboard = () => {
               </tr>
             </thead>
             <tbody className="text-gray-700">
-              {reservations.map((reservation) => (
+              {filteredReservations.map((reservation) => (
+                /* {reservations.map((reservation) => ( */
                 <tr
                   key={reservation.id}
                   className="border-b border-gray-200 hover:bg-gray-50 transition-all"
@@ -260,7 +285,13 @@ const AdminDashboard = () => {
                   <td className="py-4 px-6">{reservation.username}</td>
                   <td className="py-4 px-6">{reservation.hotel}</td>
                   <td className="py-4 px-6">
-                    {reservation.checkIn} - {reservation.checkOut}
+                    {reservation.checkIn
+                      ? new Date(reservation.checkIn).toLocaleDateString()
+                      : ""}{" "}
+                    -{" "}
+                    {reservation.checkOut
+                      ? new Date(reservation.checkOut).toLocaleDateString()
+                      : ""}
                   </td>
                   <td className="py-4 px-6">
                     <span
