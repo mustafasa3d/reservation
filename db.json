@@ -1,46 +1,6 @@
 {
   "reservations": [
     {
-      "id": "7173",
-      "hotel": "Hotel 2",
-      "username": "zedigusor",
-      "checkIn": "2025-01-24",
-      "checkOut": "2025-01-31",
-      "guests": "60",
-      "roomType": "Suite",
-      "status": "pending"
-    },
-    {
-      "id": "52f8",
-      "hotel": "Hotel 2",
-      "username": "zedigusor",
-      "checkIn": "2025-01-24",
-      "checkOut": "2025-01-31",
-      "guests": "60",
-      "roomType": "Suite",
-      "status": "pending"
-    },
-    {
-      "id": "94ae",
-      "hotel": "Hotel 2",
-      "username": "zedigusor",
-      "checkIn": "2025-01-24",
-      "checkOut": "2025-01-31",
-      "guests": "60",
-      "roomType": "Suite",
-      "status": "pending"
-    },
-    {
-      "id": "124d",
-      "hotel": "Hotel 2",
-      "username": "zedigusor",
-      "checkIn": "2025-01-24",
-      "checkOut": "2025-01-31",
-      "guests": "60",
-      "roomType": "Suite",
-      "status": "pending"
-    },
-    {
       "id": "a35e",
       "hotel": "Hotel 2",
       "username": "zedigusor",
@@ -48,7 +8,7 @@
       "checkOut": "2025-01-31",
       "guests": "60",
       "roomType": "Suite",
-      "status": "pending"
+      "status": "approved"
     },
     {
       "id": "b7be",
@@ -58,7 +18,7 @@
       "checkOut": "2025-01-31",
       "guests": "60",
       "roomType": "Suite",
-      "status": "pending"
+      "status": "cancelled"
     },
     {
       "id": "98a4",
@@ -68,6 +28,166 @@
       "checkOut": "2025-01-25",
       "guests": "60",
       "roomType": "Suite",
+      "status": "pending"
+    },
+    {
+      "id": "679b",
+      "hotel": "Hotel 2",
+      "username": "rorazud",
+      "checkIn": "2025-01-24",
+      "checkOut": "2025-01-29",
+      "guests": "58",
+      "roomType": "Double",
+      "status": "pending"
+    },
+    {
+      "id": "2e24",
+      "hotel": "Hotel 2",
+      "username": "rorazud",
+      "checkIn": "2025-01-24",
+      "checkOut": "2025-01-29",
+      "guests": "58",
+      "roomType": "Double",
+      "status": "pending"
+    },
+    {
+      "id": "c933",
+      "hotel": "Hotel 2",
+      "username": "rorazud",
+      "checkIn": "2025-01-24",
+      "checkOut": "2025-01-29",
+      "guests": "58",
+      "roomType": "Double",
+      "status": "pending"
+    },
+    {
+      "id": "6e15",
+      "hotel": "Hotel 2",
+      "username": "rorazud",
+      "checkIn": "2025-01-24",
+      "checkOut": "2025-01-29",
+      "guests": "58",
+      "roomType": "Double",
+      "status": "cancelled"
+    },
+    {
+      "id": "34e9",
+      "hotel": "Hotel 2",
+      "username": "rorazud",
+      "checkIn": "2025-01-24",
+      "checkOut": "2025-01-29",
+      "guests": "58",
+      "roomType": "Double",
+      "status": "pending"
+    },
+    {
+      "id": "9f0a",
+      "hotel": "Hotel 2",
+      "username": "rorazud",
+      "checkIn": "2025-01-24",
+      "checkOut": "2025-01-29",
+      "guests": "58",
+      "roomType": "Double",
+      "status": "pending"
+    },
+    {
+      "id": "ad1d",
+      "hotel": "Hotel 2",
+      "username": "rorazud",
+      "checkIn": "2025-01-24",
+      "checkOut": "2025-01-29",
+      "guests": "58",
+      "roomType": "Double",
+      "status": "pending"
+    },
+    {
+      "id": "b04d",
+      "hotel": "Hotel 2",
+      "username": "rorazud",
+      "checkIn": "2025-01-24",
+      "checkOut": "2025-01-29",
+      "guests": "58",
+      "roomType": "Double",
+      "status": "pending"
+    },
+    {
+      "id": "0d64",
+      "hotel": "Hotel 2",
+      "username": "rorazud",
+      "checkIn": "2025-01-24",
+      "checkOut": "2025-01-29",
+      "guests": "58",
+      "roomType": "Double",
+      "status": "pending"
+    },
+    {
+      "id": "0347",
+      "hotel": "Hotel 2",
+      "username": "rorazud",
+      "checkIn": "2025-01-24",
+      "checkOut": "2025-01-29",
+      "guests": "58",
+      "roomType": "Double",
+      "status": "pending"
+    },
+    {
+      "id": "f43f",
+      "hotel": "Hotel 2",
+      "username": "rorazud",
+      "checkIn": "2025-01-24",
+      "checkOut": "2025-01-29",
+      "guests": "58",
+      "roomType": "Double",
+      "status": "pending"
+    },
+    {
+      "id": "859f",
+      "hotel": "Hotel 2",
+      "username": "rorazud",
+      "checkIn": "2025-01-24",
+      "checkOut": "2025-01-29",
+      "guests": "58",
+      "roomType": "Double",
+      "status": "pending"
+    },
+    {
+      "id": "ff9f",
+      "hotel": "Hotel 2",
+      "username": "rorazud",
+      "checkIn": "2025-01-24",
+      "checkOut": "2025-01-29",
+      "guests": "58",
+      "roomType": "Double",
+      "status": "pending"
+    },
+    {
+      "id": "8f3d",
+      "hotel": "Hotel 2",
+      "username": "rorazud",
+      "checkIn": "2025-01-24",
+      "checkOut": "2025-01-29",
+      "guests": "58",
+      "roomType": "Double",
+      "status": "pending"
+    },
+    {
+      "id": "1a59",
+      "hotel": "Hotel 2",
+      "username": "rorazud",
+      "checkIn": "2025-01-24",
+      "checkOut": "2025-01-29",
+      "guests": "58",
+      "roomType": "Double",
+      "status": "pending"
+    },
+    {
+      "id": "9369",
+      "hotel": "Hotel 2",
+      "username": "rorazud",
+      "checkIn": "2025-01-24",
+      "checkOut": "2025-01-29",
+      "guests": "58",
+      "roomType": "Double",
       "status": "pending"
     }
   ],
