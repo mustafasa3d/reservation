@@ -1,10 +1,16 @@
-import AdminDashboard from '@/components/AdminDashboard'
-import React from 'react'
+import AdminDashboard from "@/components/admin/AdminDashboard";
+import Header from "@/components/Header";
 
 function page() {
   return (
-    <AdminDashboard /> 
-  )
+    <>
+      <Header
+        title="Admin Dashboard"
+        btnInfo={{ href: "/admin/reservations", text: "+ Add Reservation" }}
+      />
+      <AdminDashboard />
+    </>
+  );
 }
 
-export default page
+export default page;

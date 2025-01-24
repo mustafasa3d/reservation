@@ -2,45 +2,41 @@
 
 import { useEffect, useState } from "react";
 
-import { login } from "@/utils/api/auth";
+import Loading from "../Loading";
+import { login } from "@/utils/api/services";
 import { useRouter } from "next/navigation";
 
 const LoginForm = () => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const router = useRouter();
+  const [username, setUsername] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [error, setError] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(false);
+  const router = useRouter() as ReturnType<typeof useRouter>;
 
   const handleLogin = async () => {
-    /* setLoading(true); */
-    try {
-      const { data: users } = await login({ username, password });
-      const user = users?.find(
-        (u) => u.username === username && u.password === password
-      );
+    setLoading(true);
+    const user = await login({ username, password });
 
-      console.log("usersssssssss", user);
-
-      if (user) {
-        localStorage.setItem("token", user.token);
-        localStorage.setItem("role", user.role);
-
-        if (user.role === "admin") {
-          router.push("/admin"); // توجيه إلى صفحة الأدمن
-        } else {
-          router.push("/user"); // توجيه إلى صفحة المستخدم العادي
-        }
-      } else {
-        /*  setError('Invalid username or password'); */
-      }
-
-      /* setReservations(data); */
-    } catch (error) {
-      console.error("Failed to fetch reservations:", error);
-      /* setError('Invalid username or password'); */
-    } finally {
-      /* setLoading(false); */
+    if (user) {
+      if (user.role === "admin") router.push("/admin");
+      if (user.role === "user") router.push("/user");
+      setLoading(false);
+    } else {
+      setError("Invalid username or password");
+      setLoading(false);
     }
+    setLoading(false);
   };
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    const role = localStorage.getItem("role");
+
+    if (token && role === "admin") router.push("/admin");
+    if (token && role === "user") router.push("/user");
+  }, []);
+
+  if (loading) return <Loading />;
 
   return (
     <div className="flex items-center justify-center h-screen bg-gradient-to-r from-gray-900 to-gray-700">
@@ -69,6 +65,8 @@ const LoginForm = () => {
           placeholder="Password"
           className="w-full mb-6 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all text-gray-700"
         />
+
+        {error && <p className="text-red-600 text-center mb-4">{error}</p>}
 
         <button
           className="w-full bg-gradient-to-r from-blue-500 to-purple-600 text-white py-3 px-6 rounded-lg hover:from-blue-600 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition-all"

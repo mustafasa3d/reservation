@@ -1,9 +1,10 @@
+"use client";
 import { useEffect, useState } from "react";
 
 import Select from "react-select";
-import { fetchHotels } from "@/utils/api/services";
+import { createReservation, fetchHotels } from "@/utils/api/services";
 
-const ReservationForm = ({ onSubmit }: { onSubmit: (data: any) => void }) => {
+const ReservationForm = () => {
   const [formData, setFormData] = useState({
     hotel: "",
     username: "",
@@ -16,14 +17,27 @@ const ReservationForm = ({ onSubmit }: { onSubmit: (data: any) => void }) => {
 
   const [hotels, setHotels] = useState([]); // حالة لتخزين قائمة الفنادق
 
-  async function getHotelsData() {
-    const data = await fetchHotels();
-    setHotels(data?.map((hotel) => ({ value: hotel.name, label: hotel.name })));
-    console.log("aaaaaaaaaaaaa", data);
-  }
+  const [reservations, setReservations] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  console.log(reservations);
+  console.log(loading);
+
+  const handleCreateReservation = async (reservationData: any) => {
+    reservationData.status = "pending";
+    setLoading(true);
+    try {
+      const newReservation = await createReservation(reservationData);
+      setReservations((prev) => [newReservation, ...prev]);
+    } catch (error) {
+      console.error("Failed to create reservation:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
-    getHotelsData();
+    fetchHotels(setHotels);
   }, []);
 
   const handleChange = (
@@ -68,7 +82,7 @@ const ReservationForm = ({ onSubmit }: { onSubmit: (data: any) => void }) => {
     }
 
     // تنفيذ onSubmit فقط بعد التحقق الكامل
-    onSubmit(formData);
+    handleCreateReservation(formData);
   };
 
   const handleFilterChange = (item) => {
@@ -95,20 +109,16 @@ const ReservationForm = ({ onSubmit }: { onSubmit: (data: any) => void }) => {
         />
       </div>
       <div className="mb-6">
-      <label className="block text-gray-700 font-semibold mb-2">
-            Hotel
-          </label>
+        <label className="block text-gray-700 font-semibold mb-2">Hotel</label>
         <Select
           options={hotels}
           value={
-            formData.hotel ?
-            
-            { value: formData.hotel, label: formData.hotel }
-          :
-            null
+            formData.hotel
+              ? { value: formData.hotel, label: formData.hotel }
+              : null
           }
           onChange={(selectedOption) => handleFilterChange(selectedOption)}
-            placeholder="Select Hotel"
+          placeholder="Select Hotel"
           className="react-select-container text-black"
           classNamePrefix="react-select"
         />

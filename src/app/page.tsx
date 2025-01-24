@@ -1,9 +1,5 @@
 import LoginForm from "@/components/home/LoginForm";
 
-export default function Home() {
-  return (
-    
-    <LoginForm />
-    
-  );
-}
+const Home = async () => <LoginForm />;
+
+export default Home;
