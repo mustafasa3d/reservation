@@ -25,7 +25,7 @@ const ReservationForm = () => {
   const [error, setError] = useState("");
   const [hotels, setHotels] = useState([] as selectOption[]);
   const [loading, setLoading] = useState(false);
-  const [reservations, setReservations]=  useState([] as Reservation[]);
+  const [reservations, setReservations] = useState([] as Reservation[]);
   const [showPopup, setShowPopup] = useState(false);
   const [popupMessage, setPopupMessage] = useState("");
   const [isSuccess, setIsSuccess] = useState(false);
@@ -44,42 +44,17 @@ const ReservationForm = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const missingFields = requiredFields.filter((field) => !formData[field]);
-
-    if (missingFields.length > 0) {
-      setError("يرجى ملء جميع الحقول المطلوبة");
-      return;
-    }
-
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-
-    const checkInDate = new Date(formData.checkIn);
-    const checkOutDate = new Date(formData.checkOut);
-
-    if (checkInDate < today) {
-      setError("لا يمكن حجز تاريخ في الماضي");
-      return;
-    }
-
-    if (checkOutDate <= checkInDate) {
-      setError("يجب أن يكون تاريخ المغادرة بعد تاريخ الوصول");
-      return;
-    }
-
-    try {
+    await createReservation(
       /* @ts-ignore */
-      formData.status = "pending";
-      /* @ts-ignore */
-      await createReservation(formData, setReservations, setLoading);
-      setPopupMessage("تم الحجز بنجاح!");
-      setIsSuccess(true);
-      setShowPopup(true);
-    } catch (err) {
-      setPopupMessage("حدث خطأ أثناء الحجز. يرجى المحاولة مرة أخرى.");
-      setIsSuccess(false);
-      setShowPopup(true);
-    }
+      formData,
+      requiredFields,
+      setReservations,
+      setLoading,
+      setError,
+      setIsSuccess,
+      setShowPopup,
+      setPopupMessage
+    );
   };
 
   if (loading) return <Loading />;
@@ -145,7 +120,6 @@ const ReservationForm = () => {
           { value: "Double", label: "Double" },
           { value: "Suite", label: "Suite" },
         ]}
-        
       />
 
       {error && (
