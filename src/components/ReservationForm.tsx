@@ -4,8 +4,10 @@ import { Reservation, selectOption } from "@/types";
 import { createReservation, fetchHotels } from "@/utils/api/services";
 import { useEffect, useState } from "react";
 
+import CustomInput from "./CustomInput";
 import Loading from "./Loading";
-import Select from "react-select";
+import PopupModal from "./PopupModal";
+import { useRouter } from "next/navigation";
 
 const initFormData = {
   hotel: "",
@@ -16,15 +18,18 @@ const initFormData = {
   roomType: "Single",
 };
 
-/* required fields */
 const requiredFields = ["hotel", "username", "checkIn", "checkOut", "guests"];
 
 const ReservationForm = () => {
   const [formData, setFormData] = useState(initFormData);
   const [error, setError] = useState("");
-  const [hotels, setHotels] = useState([] as selectOption[]); // حالة لتخزين قائمة الفنادق
-  const [reservations, setReservations] = useState([] as Reservation[]);
+  const [hotels, setHotels] = useState([] as selectOption[]);
   const [loading, setLoading] = useState(false);
+  const [reservations, setReservations]=  useState([] as Reservation[]);
+  const [showPopup, setShowPopup] = useState(false);
+  const [popupMessage, setPopupMessage] = useState("");
+  const [isSuccess, setIsSuccess] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
     fetchHotels(setHotels);
@@ -37,10 +42,8 @@ const ReservationForm = () => {
     setError("");
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
-    /* @ts-ignore */
     const missingFields = requiredFields.filter((field) => !formData[field]);
 
     if (missingFields.length > 0) {
@@ -64,15 +67,19 @@ const ReservationForm = () => {
       return;
     }
 
-    // تنفيذ onSubmit فقط بعد التحقق الكامل
-    /* @ts-ignore */
-    formData.status = "pending";
-    /* @ts-ignore */
-    createReservation(formData, setReservations, setLoading);
-  };
-
-  const handleFilterChange = (item: any) => {
-    setFormData({ ...formData, hotel: item.value });
+    try {
+      /* @ts-ignore */
+      formData.status = "pending";
+      /* @ts-ignore */
+      await createReservation(formData, setReservations, setLoading);
+      setPopupMessage("تم الحجز بنجاح!");
+      setIsSuccess(true);
+      setShowPopup(true);
+    } catch (err) {
+      setPopupMessage("حدث خطأ أثناء الحجز. يرجى المحاولة مرة أخرى.");
+      setIsSuccess(false);
+      setShowPopup(true);
+    }
   };
 
   if (loading) return <Loading />;
@@ -82,99 +89,81 @@ const ReservationForm = () => {
       onSubmit={handleSubmit}
       className="p-6 bg-gradient-to-r from-blue-50 to-purple-50 shadow-lg rounded-lg max-w-xl mx-auto"
     >
-      <div className="mb-6">
-        <label className="block text-gray-700 font-semibold mb-2">
-          User Name
-        </label>
-        <input
-          type="text"
-          name="username"
-          value={formData.username}
-          onChange={handleChange}
-          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all text-blue-900"
-          placeholder="User Name"
-          required
-        />
-      </div>
-      <div className="mb-6">
-        <label className="block text-gray-700 font-semibold mb-2">Hotel</label>
-        <Select
-          options={hotels}
-          value={
-            formData.hotel
-              ? { value: formData.hotel, label: formData.hotel }
-              : null
-          }
-          onChange={(selectedOption) => handleFilterChange(selectedOption)}
-          placeholder="Select Hotel"
-          className="react-select-container text-black"
-          classNamePrefix="react-select"
-        />
-      </div>
+      <CustomInput
+        type="text"
+        name="username"
+        value={formData.username}
+        onChange={handleChange}
+        label="User Name"
+        placeholder="User Name"
+        required
+      />
+      <CustomInput
+        type="select"
+        name="hotel"
+        value={formData.hotel}
+        onChange={handleChange}
+        label="Hotel"
+        isReactSelect
+        options={hotels}
+      />
       <div className="mb-6 flex gap-4">
-        <div className="w-full">
-          <label className="block text-gray-700 font-semibold mb-2">
-            Check-In
-          </label>
-          <input
-            type="date"
-            name="checkIn"
-            value={formData.checkIn}
-            onChange={handleChange}
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all text-blue-900"
-            placeholder="Check-In"
-            required
-          />
-        </div>
-        <div className="w-full">
-          <label className="block text-gray-700 font-semibold mb-2">
-            Check-Out
-          </label>
-          <input
-            type="date"
-            name="checkOut"
-            value={formData.checkOut}
-            onChange={handleChange}
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all text-blue-900"
-            placeholder="Check-Out"
-            required
-          />
-        </div>
-      </div>
-      <div className="mb-6">
-        <label className="block text-gray-700 font-semibold mb-2">
-          Number of Guests
-        </label>
-        <input
-          type="number"
-          name="guests"
-          value={formData.guests}
+        <CustomInput
+          type="date"
+          name="checkIn"
+          value={formData.checkIn}
           onChange={handleChange}
-          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all text-blue-900"
-          placeholder="Number of Guests"
+          label="Check-In"
+          required
+        />
+        <CustomInput
+          type="date"
+          name="checkOut"
+          value={formData.checkOut}
+          onChange={handleChange}
+          label="Check-Out"
           required
         />
       </div>
-      <div className="mb-6">
-        <label className="block text-gray-700 font-semibold mb-2">
-          Room Type
-        </label>
-        <select
-          title="Room Type"
-          name="roomType"
-          value={formData.roomType}
-          onChange={handleChange}
-          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all text-blue-900"
-        >
-          <option value="Single">Single</option>
-          <option value="Double">Double</option>
-          <option value="Suite">Suite</option>
-        </select>
-      </div>
+      <CustomInput
+        type="number"
+        name="guests"
+        value={formData.guests}
+        onChange={handleChange}
+        label="Number of Guests"
+        required
+      />
+      <CustomInput
+        type="select"
+        name="roomType"
+        value={formData.roomType}
+        onChange={handleChange}
+        label="Room Type"
+        isReactSelect
+        options={[
+          { value: "Single", label: "Single" },
+          { value: "Double", label: "Double" },
+          { value: "Suite", label: "Suite" },
+        ]}
+        
+      />
 
       {error && (
         <div className="mb-6 text-white bg-red-600 p-3 rounded-lg">{error}</div>
       )}
+
+      <PopupModal
+        showPopup={showPopup}
+        popupMessage={popupMessage}
+        isSuccess={isSuccess}
+        onClose={() => setShowPopup(false)}
+        onAction={() => {
+          if (isSuccess) {
+            router.push("/admin");
+          }
+          setShowPopup(false);
+        }}
+      />
 
       <button className="w-full bg-gradient-to-r from-blue-500 to-purple-600 text-white py-3 px-6 rounded-lg hover:from-blue-600 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition-all">
         Submit
