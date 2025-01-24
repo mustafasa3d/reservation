@@ -50,7 +50,8 @@ const Filters: React.FC<FiltersProps> = ({
           value={tempFilters.startDate}
           onChange={(e) => updateTempFilters("startDate", e.target.value)}
           className="p-2 border rounded-lg text-black"
-        />
+          placeholder="Start Date"
+          />
 
         <input
           type="date"
@@ -58,7 +59,8 @@ const Filters: React.FC<FiltersProps> = ({
           value={tempFilters.endDate}
           onChange={(e) => updateTempFilters("endDate", e.target.value)}
           className="p-2 border rounded-lg text-black"
-        />
+          placeholder="End Date"
+          />
 
         <Select
           options={hotels}

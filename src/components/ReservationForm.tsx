@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 
 import Select from "react-select";
 import { createReservation, fetchHotels } from "@/utils/api/services";
+import { Reservation, selectOption } from "@/types";
 
 const ReservationForm = () => {
   const [formData, setFormData] = useState({
@@ -15,9 +16,9 @@ const ReservationForm = () => {
   });
   const [error, setError] = useState("");
 
-  const [hotels, setHotels] = useState([]); // حالة لتخزين قائمة الفنادق
+  const [hotels, setHotels] = useState([] as selectOption[]); // حالة لتخزين قائمة الفنادق
 
-  const [reservations, setReservations] = useState([]);
+  const [reservations, setReservations] = useState([] as Reservation[]);
   const [loading, setLoading] = useState(false);
 
   console.log(reservations);
@@ -28,7 +29,9 @@ const ReservationForm = () => {
     setLoading(true);
     try {
       const newReservation = await createReservation(reservationData);
-      setReservations((prev) => [newReservation, ...prev]);
+      setReservations(
+        (prev: Reservation[]) => [newReservation, ...prev] as Reservation[]
+      );
     } catch (error) {
       console.error("Failed to create reservation:", error);
     } finally {
@@ -58,6 +61,7 @@ const ReservationForm = () => {
       "checkOut",
       "guests",
     ];
+    /* @ts-ignore */
     const missingFields = requiredFields.filter((field) => !formData[field]);
 
     if (missingFields.length > 0) {
@@ -85,7 +89,7 @@ const ReservationForm = () => {
     handleCreateReservation(formData);
   };
 
-  const handleFilterChange = (item) => {
+  const handleFilterChange = (item: any) => {
     setFormData({ ...formData, hotel: item.value });
   };
 
@@ -144,6 +148,7 @@ const ReservationForm = () => {
             value={formData.checkIn}
             onChange={handleChange}
             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all text-blue-900"
+            placeholder="Check-In"
             required
           />
         </div>
@@ -157,6 +162,7 @@ const ReservationForm = () => {
             value={formData.checkOut}
             onChange={handleChange}
             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all text-blue-900"
+            placeholder="Check-Out"
             required
           />
         </div>
@@ -171,6 +177,7 @@ const ReservationForm = () => {
           value={formData.guests}
           onChange={handleChange}
           className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all text-blue-900"
+          placeholder="Number of Guests"
           required
         />
       </div>
@@ -179,6 +186,7 @@ const ReservationForm = () => {
           Room Type
         </label>
         <select
+          title="Room Type"
           name="roomType"
           value={formData.roomType}
           onChange={handleChange}

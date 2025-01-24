@@ -1,27 +1,7 @@
 {
   "reservations": [
     {
-      "id": "7be0",
-      "hotel": "Hotel 1",
-      "username": "jixava",
-      "checkIn": "2025-01-24",
-      "checkOut": "2025-01-31",
-      "guests": "52",
-      "roomType": "Double",
-      "status": "cancelled"
-    },
-    {
       "id": "995a",
-      "hotel": "Hotel 1",
-      "username": "cuwit",
-      "checkIn": "2025-01-24",
-      "checkOut": "2025-01-29",
-      "guests": "4",
-      "roomType": "Single",
-      "status": "pending"
-    },
-    {
-      "id": "ca03",
       "hotel": "Hotel 1",
       "username": "cuwit",
       "checkIn": "2025-01-24",
@@ -39,18 +19,8 @@
       "checkOut": "2025-01-29",
       "guests": "4",
       "roomType": "Single",
-      "status": "pending"
-    },
-    {
-      "id": "8e70",
-      "hotel": "Hotel 1",
-      "username": "cuwit",
-      "checkIn": "2025-01-24",
-      "checkOut": "2025-01-29",
-      "guests": "4",
-      "roomType": "Single",
-      "status": "approved",
-      "message": null
+      "status": "cancelled",
+      "message": "fdsdasd"
     },
     {
       "id": "0126",
@@ -110,6 +80,36 @@
       "checkOut": "2025-01-31",
       "guests": "44",
       "roomType": "Double",
+      "status": "pending"
+    },
+    {
+      "id": "b987",
+      "hotel": "Hotel 1",
+      "username": "tatawafib",
+      "checkIn": "2025-01-24",
+      "checkOut": "2025-01-30",
+      "guests": "94",
+      "roomType": "Suite",
+      "status": "pending"
+    },
+    {
+      "id": "b7c7",
+      "hotel": "Hotel 2",
+      "username": "ggg",
+      "checkIn": "2025-01-24",
+      "checkOut": "2025-01-31",
+      "guests": 1,
+      "roomType": "Single",
+      "status": "pending"
+    },
+    {
+      "id": "09a3",
+      "hotel": "Hotel 2",
+      "username": "ggg",
+      "checkIn": "2025-01-24",
+      "checkOut": "2025-01-31",
+      "guests": 1,
+      "roomType": "Single",
       "status": "pending"
     }
   ],

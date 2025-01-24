@@ -1,61 +1,35 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import Select from "react-select";
 import Filters from "./Filters";
 import Table from "./Table";
-import {
-  deleteReservation,
-  fetchHotels,
-  fetchReservations,
-  updateReservation,
-} from "../../utils/api/services";
+import { fetchHotels, fetchReservations } from "../../utils/api/services";
 import { filterReservationsByDates } from "@/utils/filterReservations";
 import { handleUpdateReservation } from "@/utils/handleReservationActions";
+import { initializeFilters } from "@/utils/initializeFilters";
+import { Reservation, selectOption } from "@/types";
+
+const defaultFilterValues = {
+  status: "",
+  startDate: "",
+  endDate: "",
+  hotelName: "",
+  userName: "",
+};
 
 const AdminDashboard: React.FC = () => {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
-  const [reservations, setReservations] = useState([]);
+  const [reservations, setReservations] = useState([] as Reservation[]);
   const [loading, setLoading] = useState(true);
   const [modalOpen, setModalOpen] = useState<{
     id: string;
     target: string;
   } | null>(null);
-  const [hotels, setHotels] = useState([]);
-  const [tempFilters, setTempFilters] = useState({
-    status: "",
-    startDate: "",
-    endDate: "",
-    hotelName: "",
-    userName: "",
-  });
-
-  // جلب بيانات الفنادق
-  /* async function getHotelsData() {
-    const data = await fetchHotels();
-    const allHotels = data?.map((hotel) => ({
-      value: hotel.name,
-      label: hotel.name,
-    }));
-    setHotels([{ value: "", label: "All Hotels" }, ...allHotels]);
-  } */
-
-  // جلب بيانات الحجوزات
-  const fetchData = async () => {
-    setLoading(true);
-    try {
-      const params = Object.fromEntries(searchParams.entries());
-      const data = await fetchReservations(params);
-      setReservations(data);
-    } catch (error) {
-      console.error("Failed to fetch reservations:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
+  const [hotels, setHotels] = useState([] as selectOption[]);
+  const [tempFilters, setTempFilters] = useState(defaultFilterValues);
 
   // تحديث الفلاتر المؤقتة
   const updateTempFilters = (name: string, value: string) => {
@@ -81,32 +55,19 @@ const AdminDashboard: React.FC = () => {
   );
 
   const reset = () => {
-    setTempFilters({
-      status: "",
-      startDate: "",
-      endDate: "",
-      hotelName: "",
-      userName: "",
-    });
+    setTempFilters(defaultFilterValues);
     router.replace(pathname);
   };
 
   useEffect(() => {
     /* getHotelsData(); */
     fetchHotels(setHotels);
-    // تهيئة الفلاتر المؤقتة من الـ URL الموجود
-    const initialFilters = {
-      status: searchParams.get("status") || "",
-      startDate: searchParams.get("startDate") || "",
-      endDate: searchParams.get("endDate") || "",
-      hotelName: searchParams.get("hotelName") || "",
-      userName: searchParams.get("userName") || "",
-    };
-    setTempFilters(initialFilters);
+    initializeFilters(searchParams, setTempFilters);
   }, []);
 
   useEffect(() => {
-    fetchData();
+    fetchReservations(searchParams, setReservations, setLoading);
+    /* fetchData(); */
   }, [searchParams]);
 
   return (

@@ -1,10 +1,11 @@
+import { Reservation } from "@/types";
 import { deleteReservation, updateReservation } from "../utils/api/services";
 
 export const handleUpdateReservation = async (
   id: string,
   status: string,
-  setReservations: (reservations: any[]) => void,
-  setLoading: (loading: boolean) => void,
+  setReservations: React.Dispatch<React.SetStateAction<Reservation[]>>,
+  setLoading: React.Dispatch<React.SetStateAction<boolean>>,
   message?: string
 ) => {
   setLoading(true);
@@ -18,15 +19,18 @@ export const handleUpdateReservation = async (
       }
     } else {
       const data = await updateReservation(id, {
-        status,
+        status: status,
         message: message || null,
-      });
+      } as any);
 
       if (data?.status === "cancelled" || data?.status === "approved") {
-        setReservations((prev) =>
-          prev.map((reservation) =>
-            reservation.id === id ? { ...reservation, status } : reservation
-          )
+        setReservations(
+          (prev) =>
+            prev.map((reservation) =>
+              reservation.id === id
+                ? { ...reservation, status: status }
+                : reservation
+            ) as Reservation[]
         );
       }
     }
