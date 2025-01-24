@@ -1,53 +1,73 @@
 {
   "reservations": [
     {
-      "id": "2ac3",
-      "hotel": "Hotel 1",
-      "username": "1748258@tedata.net.eg",
-      "checkIn": "2025-01-23",
-      "checkOut": "2025-01-30",
-      "guests": 1,
-      "roomType": "Single",
-      "status": "approved"
-    },
-    {
-      "id": "8e23",
+      "id": "7173",
       "hotel": "Hotel 2",
-      "username": "1748258@tedata.net.eg",
-      "checkIn": "2025-01-23",
-      "checkOut": "2025-01-30",
-      "guests": 1,
-      "roomType": "Single",
-      "status": "approved"
-    },
-    {
-      "id": "1cb1",
-      "hotel": "Hotel 1",
-      "username": "1748258@tedata.net.eg",
-      "checkIn": "2025-01-23",
-      "checkOut": "2025-01-24",
-      "guests": "-1",
-      "roomType": "Single",
-      "status": "cancelled"
-    },
-    {
-      "id": "0a88",
-      "hotel": "Hotel 1",
-      "username": "1748258@tedata.net.eg",
-      "checkIn": "2025-01-23",
-      "checkOut": "2025-01-24",
-      "guests": "-1",
-      "roomType": "Single",
+      "username": "zedigusor",
+      "checkIn": "2025-01-24",
+      "checkOut": "2025-01-31",
+      "guests": "60",
+      "roomType": "Suite",
       "status": "pending"
     },
     {
-      "id": "35a8",
-      "hotel": "Hotel 1",
-      "username": "1748258@tedata.net.eg",
-      "checkIn": "2025-01-23",
-      "checkOut": "2025-01-24",
-      "guests": "-1",
-      "roomType": "Single",
+      "id": "52f8",
+      "hotel": "Hotel 2",
+      "username": "zedigusor",
+      "checkIn": "2025-01-24",
+      "checkOut": "2025-01-31",
+      "guests": "60",
+      "roomType": "Suite",
+      "status": "pending"
+    },
+    {
+      "id": "94ae",
+      "hotel": "Hotel 2",
+      "username": "zedigusor",
+      "checkIn": "2025-01-24",
+      "checkOut": "2025-01-31",
+      "guests": "60",
+      "roomType": "Suite",
+      "status": "pending"
+    },
+    {
+      "id": "124d",
+      "hotel": "Hotel 2",
+      "username": "zedigusor",
+      "checkIn": "2025-01-24",
+      "checkOut": "2025-01-31",
+      "guests": "60",
+      "roomType": "Suite",
+      "status": "pending"
+    },
+    {
+      "id": "a35e",
+      "hotel": "Hotel 2",
+      "username": "zedigusor",
+      "checkIn": "2025-01-24",
+      "checkOut": "2025-01-31",
+      "guests": "60",
+      "roomType": "Suite",
+      "status": "pending"
+    },
+    {
+      "id": "b7be",
+      "hotel": "Hotel 2",
+      "username": "zedigusor",
+      "checkIn": "2025-01-24",
+      "checkOut": "2025-01-31",
+      "guests": "60",
+      "roomType": "Suite",
+      "status": "pending"
+    },
+    {
+      "id": "98a4",
+      "hotel": "Hotel 2",
+      "username": "zedigusor",
+      "checkIn": "2025-01-24",
+      "checkOut": "2025-01-25",
+      "guests": "60",
+      "roomType": "Suite",
       "status": "pending"
     }
   ],

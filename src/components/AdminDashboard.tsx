@@ -74,6 +74,33 @@ const AdminDashboard = () => {
     router.replace(`${pathname}?${params.toString()}`);
   };
 
+  const handleUpdateReservation = async (id, status) => {
+    setLoading(true);
+    try {
+      if (status === "deleted") {
+        const data = await deleteReservation(id);
+        if (data.statusText === "OK") {
+          setReservations((prev) =>
+            prev.filter((reservation) => reservation.id !== id)
+          );
+        }
+      } else {
+        const data = await updateReservation(id, { status });
+        if (data?.status === "cancelled" || data?.status === "approved") {
+          setReservations((prev) =>
+            prev.map((reservation) =>
+              reservation.id === id ? { ...reservation, status } : reservation
+            )
+          );
+        }
+      }
+    } catch (error) {
+      console.error("Failed to update reservation:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+  
   const reset = () => {
     setTempFilters({
       status: "",
@@ -107,6 +134,15 @@ const AdminDashboard = () => {
   return (
     <div className="container mx-auto py-8">
       {/* ... باقي العناصر بدون تغيير حتى قسم الفلاتر */}
+      <div className="mb-6 flex justify-between items-center">
+        <h1 className="text-3xl font-bold text-white">Admin Dashboard</h1>
+        <Link
+          href="/admin/reservations"
+          className="bg-gradient-to-r from-blue-500 to-purple-600 text-white py-2 px-6 rounded-lg hover:from-blue-600 hover:to-purple-700 transition-all shadow-md"
+        >
+          + Add Reservation
+        </Link>
+      </div>
 
       <div className="mb-6 bg-white p-4 rounded-lg shadow-md">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -180,18 +216,18 @@ const AdminDashboard = () => {
           />
 
           <button
-          type="submit"
+            type="submit"
             onClick={handleSearch}
             className="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition-all shadow-md"
           >
             Search
           </button>
           <button
-          type="button"
+            type="button"
             onClick={reset}
-            className="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition-all shadow-md"
+            className="bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition-all shadow-md"
           >
-            reset
+            Reset
           </button>
         </div>
       </div>

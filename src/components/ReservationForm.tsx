@@ -95,11 +95,20 @@ const ReservationForm = ({ onSubmit }: { onSubmit: (data: any) => void }) => {
         />
       </div>
       <div className="mb-6">
+      <label className="block text-gray-700 font-semibold mb-2">
+            Hotel
+          </label>
         <Select
           options={hotels}
-          value={{ value: formData.hotel, label: formData.hotel }}
+          value={
+            formData.hotel ?
+            
+            { value: formData.hotel, label: formData.hotel }
+          :
+            null
+          }
           onChange={(selectedOption) => handleFilterChange(selectedOption)}
-          placeholder="Select Hotel"
+            placeholder="Select Hotel"
           className="react-select-container text-black"
           classNamePrefix="react-select"
         />
