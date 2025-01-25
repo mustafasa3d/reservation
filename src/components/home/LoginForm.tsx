@@ -3,7 +3,6 @@
 import CustomInput from "../CustomInput";
 import Loading from "../Loading";
 import { login } from "@/utils/api/services";
-import useAuthRedirect from "@/utils/hooks/UseAuthRedirect";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
@@ -14,7 +13,7 @@ const LoginForm = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const router = useRouter() as ReturnType<typeof useRouter>;
 
-  useAuthRedirect();
+
 
   const handelSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

@@ -7,6 +7,7 @@ import {
   userLogin,
 } from "@/types";
 
+import Cookie from "js-cookie";
 import axios from "axios";
 
 const API_URL = "http://localhost:3001";
@@ -14,7 +15,7 @@ const API_URL = "http://localhost:3001";
 /* init axios and add token for all requests */
 axios.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem("token");
+    const token = Cookie.get("token");
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
@@ -87,8 +88,8 @@ export const login = async (
     );
 
     if (user) {
-      localStorage.setItem("token", user.token);
-      localStorage.setItem("role", user.role);
+      Cookie.set("token", user.token);
+      Cookie.set("role", user.role);
 
       if (user.role === "admin") router.push("/admin");
       if (user.role === "user") router.push("/user");
