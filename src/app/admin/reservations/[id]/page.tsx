@@ -2,15 +2,19 @@ import Header from "@/components/Header";
 import SingleReservationView from "@/components/SingleReservationView";
 import { getSingleData } from "@/utils/api/commanService";
 
-type propsType = {
-  params: {
-    id: string;
-  };
-};
+// تعريف النوع لـ props
+type Props =  {
+  params: Promise<{ id: string | any }> // Handle both promise and object
+}
 
-async function SingleReservation({ params: { id } }: propsType) {
+// الدالة الرئيسية
+export default async function SingleReservation({ params }: Props) {
+  const { id } = await params
+
+
+  // جلب بيانات الحجز
   const reservationData = await getSingleData(`reservations/${id}`);
-  
+
   return (
     <>
       <Header
@@ -22,5 +26,3 @@ async function SingleReservation({ params: { id } }: propsType) {
     </>
   );
 }
-
-export default SingleReservation;

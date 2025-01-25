@@ -3,13 +3,12 @@ import Header from "@/components/Header";
 import SingleReservationView from "@/components/SingleReservationView";
 import { getSingleData } from "@/utils/api/commanService";
 
-type propsType = {
-  params: {
-    id: string;
-  };
+type Props = {
+  params: Promise<{ id: string | any }>; // Handle both promise and object
 };
 
-async function SingleReservation({ params: { id } }: propsType) {
+async function SingleReservation({ params }: Props) {
+  const { id } = await params;
   const reservationData = await getSingleData(`reservations/${id}`);
   return (
     <>

@@ -17,7 +17,7 @@ const roomTypesOptions = [
 ];
 
 const ReservationForm = ({ from }: { from?: string }) => {
-  const usernameFromCookie = Cookie.get("username");
+  const usernameFromCookie = Cookie.get("username")!;
   const isNeededUserName = from === "user" ? false : true;
   const username = isNeededUserName ? ["username"] : [];
   const requiredFields = [
@@ -28,8 +28,7 @@ const ReservationForm = ({ from }: { from?: string }) => {
     "guests",
   ];
 
-  const initFormData = isNeededUserName
-    ? {
+  const initFormData =  {
         hotel: "",
         username: "",
         checkIn: "",
@@ -37,13 +36,7 @@ const ReservationForm = ({ from }: { from?: string }) => {
         guests: 1,
         roomType: "Single",
       }
-    : {
-        hotel: "",
-        checkIn: "",
-        checkOut: "",
-        guests: 1,
-        roomType: "Single",
-      };
+    
 
   const [formData, setFormData] = useState(initFormData);
   const [error, setError] = useState("");
