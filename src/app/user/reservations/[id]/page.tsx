@@ -11,7 +11,6 @@ type propsType = {
 
 async function SingleReservation({ params: { id } }: propsType) {
   const reservationData = await getSingleData(`reservations/${id}`);
-  console.log("reservationData", reservationData);
   return (
     <>
       <Header

@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { Reservation, selectOption } from "@/types";
-import { fetchReservations, handleUpdateReservation } from "../../utils/api/admin/services";
+import { fetchReservationsAdmin, handleUpdateReservation } from "../../utils/api/admin/services";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 import Filters from "./Filters";
@@ -68,7 +68,7 @@ const AdminDashboard: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    fetchReservations(searchParams, setReservations, setLoading);
+    fetchReservationsAdmin(searchParams, setReservations, setLoading);
     /* fetchData(); */
   }, [searchParams]);
 

@@ -1,10 +1,16 @@
 import { Reservation } from "@/types";
 
-const SingleReservationView = ({ reservation }: { reservation: Reservation }) => {
+const SingleReservationView = ({
+  reservation,
+}: {
+  reservation: Reservation;
+}) => {
   return (
     <div className="container mx-auto p-4">
       <div className="bg-white shadow-md rounded-lg p-6">
-        <h2 className="text-2xl font-bold mb-10 text-blue-600 ">Reservation Details</h2>
+        <h2 className="text-2xl font-bold mb-10 text-blue-600 ">
+          Reservation Details
+        </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <p className="text-gray-700 font-semibold">ID:</p>
@@ -15,16 +21,16 @@ const SingleReservationView = ({ reservation }: { reservation: Reservation }) =>
             <p className="text-blue-600">{reservation?.hotel}</p>
           </div>
           <div>
-            <p className="text-gray-700 font-semibold">Username:</p>
-            <p className="text-blue-600">{reservation?.username}</p>
-          </div>
-          <div>
             <p className="text-gray-700 font-semibold">Check-In:</p>
             <p className="text-blue-600">{reservation?.checkIn}</p>
           </div>
           <div>
             <p className="text-gray-700 font-semibold">Check-Out:</p>
             <p className="text-blue-600">{reservation?.checkOut}</p>
+          </div>
+          <div>
+            <p className="text-gray-700 font-semibold">Username:</p>
+            <p className="text-blue-600">{reservation?.username}</p>
           </div>
           <div>
             <p className="text-gray-700 font-semibold">Guests:</p>
@@ -40,7 +46,9 @@ const SingleReservationView = ({ reservation }: { reservation: Reservation }) =>
           </div>
           <div>
             <p className="text-gray-700 font-semibold">Message:</p>
-            <p className="text-blue-600">{reservation?.message || "No message"}</p>
+            <p className="text-blue-600">
+              {reservation?.message || "No message"}
+            </p>
           </div>
         </div>
       </div>

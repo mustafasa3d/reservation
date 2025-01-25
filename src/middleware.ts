@@ -11,7 +11,9 @@ export function middleware(request: NextRequest) {
     if (token) {
       if (role === "admin") {
         return NextResponse.redirect(new URL("/admin", request.url));
-      } else if (role === "user") {
+        /* @ts-ignore */
+      } else if (/^user/.test(role)) {
+        // التحقق مما إذا كانت الـ role تبدأ بـ "user"
         return NextResponse.redirect(new URL("/user", request.url));
       }
     }
@@ -33,7 +35,9 @@ export function middleware(request: NextRequest) {
 
   // حماية مسارات user/*
   if (pathname.startsWith("/user")) {
-    if (role !== "user") {
+    /* @ts-ignore */
+    if (!/^user/.test(role)) {
+      // التحقق مما إذا كانت الـ role تبدأ بـ "user"
       return NextResponse.redirect(new URL("/", request.url));
     }
   }
@@ -44,3 +48,4 @@ export function middleware(request: NextRequest) {
 export const config = {
   matcher: ["/admin/:path*", "/user/:path*", "/"],
 };
+

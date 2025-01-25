@@ -27,9 +27,16 @@ export const login = async (
     if (user) {
       Cookie.set("token", user.token);
       Cookie.set("role", user.role);
+      Cookie.set("username", user.username);
 
-      if (user.role === "admin") router.push("/admin");
-      if (user.role === "user") router.push("/user");
+
+      
+      if (user.role === "admin") {
+        router.push("/admin");
+      } else {
+        console.log("hreeeeeeeee", user);
+        router.push("/user")
+      }
     } else {
       setError("Invalid username or password");
       console.error("Error in login response: ?");
@@ -125,6 +132,7 @@ export const fetchHotels = async (
 export const logout = (router: any) => {
   Cookie.remove("token");
   Cookie.remove("role");
+  Cookie.remove("username");
   router.push("/");
 };
 

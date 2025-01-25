@@ -10,7 +10,7 @@ import {
 import Cookie from "js-cookie";
 import axios from "../initAxios";
 
-export const fetchReservations = async (
+export const fetchReservationsAdmin = async (
   searchParamsData: URLSearchParams,
   setReservations: React.Dispatch<React.SetStateAction<Reservation[]>>,
   setLoading: React.Dispatch<React.SetStateAction<boolean>>
