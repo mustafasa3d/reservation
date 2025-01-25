@@ -106,6 +106,8 @@ const InstructionsPopup = ({
 
   const commandToRunServer = `npm run json-server`;
 
+  const commandToRunNextApp = `npm run dev`;
+
   const handleCopyText = (text: any) => {
     navigator.clipboard
       .writeText(text)
@@ -123,11 +125,61 @@ const InstructionsPopup = ({
   if (!open) return null;
 
   return (
-    <div className="fixed top-0 left-0 w-full h-full bg-black/90 flex flex-col items-center justify-center px-14 overflow-y-auto">
+    <div className="fixed top-0 left-0 w-full h-full bg-black/95 flex flex-col items-center justify-center px-14 overflow-y-auto">
       <div className="max-h-[90vh] w-full overflow-y-auto">
         <p className="text-white text-2xl mb-5">
           If you encounter any problem please contact me
         </p>
+
+        <div className="border border-blue-700 p-5 rounded-xl my-5">
+          <h3 className="mb-5 text-green-500">Admin</h3>
+          <div>
+            <div className="text-white">user: admin</div>
+            <div className="text-white">password: admin</div>
+          </div>
+          <div className="flex items-center gap-x-5">
+            <button
+              onClick={() => setOpen(false)}
+              className="mt-5 px-4 py-2 bg-red-500 text-white rounded hover:bg-red-700"
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+        
+        <div className="border border-blue-700 p-5 rounded-xl mt-5">
+          <h3 className="mb-5 text-green-500">Users</h3>
+          <div className="border-b border-white pb-2 mb-2">
+            <div className="text-white">user: user</div>
+            <div className="text-white">password: user</div>
+          </div>
+          <div className="border-b border-white pb-2 mb-2">
+            <div className="text-white">user: user1</div>
+            <div className="text-white">password: user1</div>
+          </div>
+          <div className="border-b border-white pb-2 mb-2">
+            <div className="text-white">user: user2</div>
+            <div className="text-white">password: user2</div>
+          </div>
+          <div className="border-b border-white pb-2 mb-2">
+            <div className="text-white">user: user3</div>
+            <div className="text-white">password: user3</div>
+          </div>
+          <div className="flex items-center gap-x-5">
+            <button
+              onClick={() => setOpen(false)}
+              className="mt-5 px-4 py-2 bg-red-500 text-white rounded hover:bg-red-700"
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+
+       
+
+        <h2 className="mb-5 mt-32 text-2xl">
+          If you want run this project locally download it from github then
+        </h2>
         <div className="border border-blue-700 p-5 rounded-xl">
           <h3 className="mb-5 text-green-500">Step 1 : init file db.json</h3>
           <div>
@@ -157,6 +209,27 @@ const InstructionsPopup = ({
           <div className="flex items-center gap-x-5">
             <button
               onClick={() => handleCopyText(commandToRunServer)}
+              className="mt-5 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700"
+            >
+              Copy
+            </button>
+            <button
+              onClick={() => setOpen(false)}
+              className="mt-5 px-4 py-2 bg-red-500 text-white rounded hover:bg-red-700"
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+
+        <div className="border border-blue-700 p-5 rounded-xl mt-5">
+          <h3 className="mb-5 text-green-500">Step 3 : run next app</h3>
+          <div>
+            <div className="text-white">{commandToRunServer}</div>
+          </div>
+          <div className="flex items-center gap-x-5">
+            <button
+              onClick={() => handleCopyText(commandToRunNextApp)}
               className="mt-5 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700"
             >
               Copy
