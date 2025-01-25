@@ -225,7 +225,7 @@ const InstructionsPopup = ({
         <div className="border border-blue-700 p-5 rounded-xl mt-5">
           <h3 className="mb-5 text-green-500">Step 3 : run next app</h3>
           <div>
-            <div className="text-white">{commandToRunServer}</div>
+            <div className="text-white">{commandToRunNextApp}</div>
           </div>
           <div className="flex items-center gap-x-5">
             <button
