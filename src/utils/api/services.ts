@@ -167,6 +167,7 @@ export const createReservation = async (
   setShowPopup: React.Dispatch<React.SetStateAction<boolean>>,
   setPopupMessage: React.Dispatch<React.SetStateAction<string>>
 ) => {
+  /* @ts-ignore */
   const missingFields = requiredFields.filter((field) => !formData[field]);
 
   if (missingFields.length > 0) {
@@ -190,6 +191,7 @@ export const createReservation = async (
     return;
   }
 
+  setLoading(true);
   try {
     /* @ts-ignore */
     formData.status = "pending";
@@ -215,4 +217,10 @@ export const createReservation = async (
   } finally {
     setLoading(false);
   }
+};
+
+export const logout = (router: any) => {
+  Cookie.remove("token");
+  Cookie.remove("role");
+  router.push("/");
 };
