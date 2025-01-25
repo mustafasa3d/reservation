@@ -8,7 +8,8 @@
       "checkOut": "2025-01-31",
       "guests": "44",
       "roomType": "Double",
-      "status": "pending"
+      "status": "approved",
+      "message": null
     },
     {
       "id": "d4d8",

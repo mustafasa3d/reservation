@@ -46,7 +46,7 @@ const Table: React.FC<TableProps> = ({
           <thead className="bg-gradient-to-r from-blue-500 to-purple-600 ">
             <tr>
               {thData.map((th) => (
-                <th key={th} className="py-3 px-6 font-semibold">
+                <th key={th} className="py-3 px-6 font-semibold last-of-type:text-right">
                   {th}
                 </th>
               ))}
@@ -84,7 +84,7 @@ const Table: React.FC<TableProps> = ({
                   </span>
                 </td>
                 <td className="py-4 px-6">
-                  <div className="flex justify-center space-x-2">
+                  <div className="flex justify-end space-x-2">
                     {reservation.status === "pending" && (
                       <button
                         onClick={() => {

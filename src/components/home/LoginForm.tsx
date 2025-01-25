@@ -24,13 +24,15 @@ const LoginForm = () => {
   if (loading) return <Loading />;
 
   return (
-    <div className="flex items-center justify-center h-screen bg-gradient-to-r from-gray-900 to-gray-700">
+    <div className="h-screen">
+
+    <div className="flex items-center justify-center h-full lg:h-[calc(100%-100px)] bg-gradient-to-r from-gray-900 to-gray-700 mt-10 rounded-3xl">
       <form
         onSubmit={(e) => {
           handelSubmit(e);
         }}
         className="p-8 bg-white shadow-2xl rounded-lg max-w-md w-full"
-      >
+        >
         <h1 className="text-2xl font-bold text-gray-800 mb-6 text-center">
           Login
         </h1>
@@ -43,7 +45,7 @@ const LoginForm = () => {
           label="User Name"
           placeholder="Username"
           className="text-gray-700"
-        />
+          />
         <CustomInput
           type="password"
           name="password"
@@ -52,18 +54,19 @@ const LoginForm = () => {
           onChange={(e) => setPassword(e.target.value)}
           placeholder="Password"
           className="text-gray-700"
-        />
+          />
 
         {error && <p className="text-red-600 text-center mb-4">{error}</p>}
 
         <button
           className="w-full bg-gradient-to-r from-blue-500 to-purple-600 text-white py-3 px-6 rounded-lg hover:from-blue-600 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition-all"
           type="submit"
-        >
+          >
           Login
         </button>
       </form>
     </div>
+          </div>
   );
 };
 
