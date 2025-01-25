@@ -12,16 +12,6 @@
       "message": null
     },
     {
-      "id": "d4d8",
-      "hotel": "Hotel 2",
-      "username": "suhipune",
-      "checkIn": "2025-01-24",
-      "checkOut": "2025-01-31",
-      "guests": "44",
-      "roomType": "Double",
-      "status": "pending"
-    },
-    {
       "id": "b987",
       "hotel": "Hotel 1",
       "username": "tatawafib",
@@ -29,7 +19,8 @@
       "checkOut": "2025-01-30",
       "guests": "94",
       "roomType": "Suite",
-      "status": "pending"
+      "status": "approved",
+      "message": null
     },
     {
       "id": "b7c7",
@@ -39,7 +30,8 @@
       "checkOut": "2025-01-31",
       "guests": 1,
       "roomType": "Single",
-      "status": "pending"
+      "status": "approved",
+      "message": null
     },
     {
       "id": "09a3",
@@ -49,7 +41,8 @@
       "checkOut": "2025-01-31",
       "guests": 1,
       "roomType": "Single",
-      "status": "pending"
+      "status": "cancelled",
+      "message": "fgddfgdfg"
     },
     {
       "id": "9900",
@@ -192,6 +185,106 @@
       "guests": "2",
       "roomType": "Double",
       "status": "pending"
+    },
+    {
+      "id": "c95c",
+      "hotel": "Hotel 3",
+      "username": "user",
+      "checkIn": "2025-01-25",
+      "checkOut": "2025-01-30",
+      "guests": "2",
+      "roomType": "Double",
+      "status": "pending"
+    },
+    {
+      "id": "92c5",
+      "hotel": "Hotel 3",
+      "username": "user",
+      "checkIn": "2025-01-25",
+      "checkOut": "2025-01-28",
+      "guests": "2",
+      "roomType": "Double",
+      "status": "pending"
+    },
+    {
+      "id": "9ce1",
+      "hotel": "Hotel 1",
+      "username": "user1",
+      "checkIn": "2025-01-25",
+      "checkOut": "2025-02-27",
+      "guests": "2",
+      "roomType": "Double",
+      "status": "pending"
+    },
+    {
+      "id": "fafe",
+      "hotel": "Hotel 1",
+      "username": "user1",
+      "checkIn": "2025-01-25",
+      "checkOut": "2025-02-27",
+      "guests": "2",
+      "roomType": "Single",
+      "status": "pending"
+    },
+    {
+      "id": "64ab",
+      "hotel": "Hotel 1",
+      "username": "user2",
+      "checkIn": "2025-01-25",
+      "checkOut": "2025-02-27",
+      "guests": "2",
+      "roomType": "Single",
+      "status": "pending"
+    },
+    {
+      "id": "75a5",
+      "hotel": "Hotel 2",
+      "username": "user2",
+      "checkIn": "2025-01-25",
+      "checkOut": "2025-02-26",
+      "guests": "2",
+      "roomType": "Single",
+      "status": "pending"
+    },
+    {
+      "id": "c3aa",
+      "hotel": "Hotel 3",
+      "username": "user3",
+      "checkIn": "2025-01-25",
+      "checkOut": "2025-02-27",
+      "guests": "2",
+      "roomType": "Single",
+      "status": "pending"
+    },
+    {
+      "id": "a60f",
+      "hotel": "Hotel 3",
+      "username": "user3",
+      "checkIn": "2025-01-25",
+      "checkOut": "2025-02-27",
+      "guests": "2",
+      "roomType": "Single",
+      "status": "pending"
+    },
+    {
+      "id": "cf79",
+      "hotel": "Hotel 2",
+      "username": "user2",
+      "checkIn": "2025-01-25",
+      "checkOut": "2025-02-27",
+      "guests": "2",
+      "roomType": "Single",
+      "status": "pending"
+    },
+    {
+      "id": "1bc7",
+      "hotel": "Hotel 1",
+      "username": "user1",
+      "checkIn": "2025-01-25",
+      "checkOut": "2025-02-27",
+      "guests": "2",
+      "roomType": "Single",
+      "status": "pending"
     }
   ],
   "login": [
@@ -208,6 +301,27 @@
       "password": "user",
       "role": "user",
       "token": "user"
+    },
+    {
+      "id": "3",
+      "username": "user1",
+      "password": "user1",
+      "role": "user1",
+      "token": "user1"
+    },
+    {
+      "id": "3",
+      "username": "user2",
+      "password": "user2",
+      "role": "user2",
+      "token": "user2"
+    },
+    {
+      "id": "3",
+      "username": "user3",
+      "password": "user3",
+      "role": "user3",
+      "token": "user3"
     }
   ],
   "hotels": [

@@ -1,7 +1,7 @@
 "use client";
 
 import { Reservation, selectOption } from "@/types";
-import { createReservation, fetchHotels } from "@/utils/api/services";
+import { createReservation, fetchHotels } from "@/utils/api/commanService";
 import { useEffect, useState } from "react";
 
 import CustomInput from "./CustomInput";

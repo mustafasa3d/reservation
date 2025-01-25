@@ -1,3 +1,4 @@
+import AdminDashboard from "@/components/admin/AdminDashboard";
 import Header from "@/components/Header";
 import SingleReservationView from "@/components/SingleReservationView";
 import { getSingleData } from "@/utils/api/commanService";
@@ -10,7 +11,7 @@ type propsType = {
 
 async function SingleReservation({ params: { id } }: propsType) {
   const reservationData = await getSingleData(`reservations/${id}`);
-  
+  console.log("reservationData", reservationData);
   return (
     <>
       <Header
