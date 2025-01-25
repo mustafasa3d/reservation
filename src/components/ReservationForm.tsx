@@ -4,29 +4,47 @@ import { Reservation, selectOption } from "@/types";
 import { createReservation, fetchHotels } from "@/utils/api/commanService";
 import { useEffect, useState } from "react";
 
+import Cookie from "js-cookie";
 import CustomInput from "./CustomInput";
 import Loading from "./Loading";
 import PopupModal from "./PopupModal";
 import { useRouter } from "next/navigation";
 
-const initFormData = {
-  hotel: "",
-  username: "",
-  checkIn: "",
-  checkOut: "",
-  guests: 1,
-  roomType: "Single",
-};
-
 const roomTypesOptions = [
   { value: "Single", label: "Single" },
   { value: "Double", label: "Double" },
   { value: "Suite", label: "Suite" },
-]
+];
 
-const requiredFields = ["hotel", "username", "checkIn", "checkOut", "guests"];
+const ReservationForm = ({ from }: { from?: string }) => {
+  const usernameFromCookie = Cookie.get("username");
+  const isNeededUserName = from === "user" ? false : true;
+  const username = isNeededUserName ? ["username"] : [];
+  const requiredFields = [
+    "hotel",
+    ...username,
+    "checkIn",
+    "checkOut",
+    "guests",
+  ];
 
-const ReservationForm = () => {
+  const initFormData = isNeededUserName
+    ? {
+        hotel: "",
+        username: "",
+        checkIn: "",
+        checkOut: "",
+        guests: 1,
+        roomType: "Single",
+      }
+    : {
+        hotel: "",
+        checkIn: "",
+        checkOut: "",
+        guests: 1,
+        roomType: "Single",
+      };
+
   const [formData, setFormData] = useState(initFormData);
   const [error, setError] = useState("");
   const [hotels, setHotels] = useState([] as selectOption[]);
@@ -50,6 +68,7 @@ const ReservationForm = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    formData.username = usernameFromCookie;
     await createReservation(
       /* @ts-ignore */
       formData,
@@ -70,16 +89,19 @@ const ReservationForm = () => {
       onSubmit={handleSubmit}
       className="p-6 bg-gradient-to-r from-blue-50 to-purple-50 shadow-lg rounded-lg max-w-xl mx-auto"
     >
-      <CustomInput
-        type="text"
-        name="username"
-        value={formData.username}
-        onChange={handleChange}
-        placeholder="User Name"
-        label="User Name"
-        className="text-black"
-        required
-      />
+      {isNeededUserName && (
+        <CustomInput
+          type="text"
+          name="username"
+          value={formData.username}
+          onChange={handleChange}
+          placeholder="User Name"
+          label="User Name"
+          className="text-black"
+          required
+        />
+      )}
+
       <CustomInput
         type="select"
         name="hotel"

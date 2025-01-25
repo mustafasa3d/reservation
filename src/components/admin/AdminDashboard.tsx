@@ -103,3 +103,67 @@ const AdminDashboard: React.FC = () => {
 };
 
 export default AdminDashboard;
+
+
+
+
+
+
+
+
+/* 
+<div
+          key={reservation.id}
+          className="flex items-center justify-center flex-col p-4 mb-10 border border-red-500"
+        >
+          <div className="flex justify-end items-center w-full mb-3">
+            {reservation?.status === "pending" && (
+              <button
+                className="px-4 py-2 bg-red-500 rounded-xl mr-auto"
+                onClick={() => {
+                  cancelReservation(
+                    reservation.id,
+                    setReservations,
+                    setLoading
+                  );
+                }}
+              >
+                cancel
+              </button>
+            )}
+            <Link
+              className="px-4 py-2 bg-red-300 rounded-xl"
+              href={`/user/reservations/${reservation.id}`}
+            >
+              see more
+            </Link>
+          </div>
+          <div className="flex justify-between items-center w-full [&>span]:w-full [&>span]:text-left">
+            <span>id: </span>
+            <span>{reservation.id}</span>
+          </div>
+          <div className="flex justify-between items-center w-full [&>span]:w-full [&>span]:text-left">
+            <span>checkIn: </span>
+            <span>{reservation.checkIn}</span>
+          </div>
+          <div className="flex justify-between items-center w-full [&>span]:w-full [&>span]:text-left">
+            <span>checkOut: </span>
+            <span>{reservation.checkOut}</span>
+          </div>
+          <div className="flex justify-between items-center w-full [&>span]:w-full [&>span]:text-left">
+            <span>guests: </span>
+            <span>{reservation.guests}</span>
+          </div>
+          <div className="flex justify-between items-center w-full [&>span]:w-full [&>span]:text-left">
+            <span>hotel: </span>
+            <span>{reservation.hotel}</span>
+          </div>
+          <div className="flex justify-between items-center w-full [&>span]:w-full [&>span]:text-left">
+            <span>status: </span>
+            <span>{reservation.status}</span>
+          </div>
+          <div className="flex justify-between items-center w-full [&>span]:w-full [&>span]:text-left">
+            <span>roomType: </span>
+            <span>{reservation.roomType}</span>
+          </div>
+        </div> */
