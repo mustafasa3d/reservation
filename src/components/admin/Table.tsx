@@ -1,4 +1,5 @@
 import ConfirmationModal from "../ConfirmationModal";
+import Link from "next/link";
 import Loading from "../Loading";
 
 interface Reservation {
@@ -46,7 +47,10 @@ const Table: React.FC<TableProps> = ({
           <thead className="bg-gradient-to-r from-blue-500 to-purple-600 ">
             <tr>
               {thData.map((th) => (
-                <th key={th} className="py-3 px-6 font-semibold last-of-type:text-right">
+                <th
+                  key={th}
+                  className="py-3 px-6 font-semibold last-of-type:text-right"
+                >
                   {th}
                 </th>
               ))}
@@ -85,6 +89,7 @@ const Table: React.FC<TableProps> = ({
                 </td>
                 <td className="py-4 px-6">
                   <div className="flex justify-end space-x-2">
+                   
                     {reservation.status === "pending" && (
                       <button
                         onClick={() => {
@@ -124,6 +129,12 @@ const Table: React.FC<TableProps> = ({
                         Delete
                       </button>
                     )}
+                     <Link
+                     href={`/admin/reservations/${reservation.id}`}
+                      className="bg-yellow-500 text-white py-1 px-4 rounded-lg hover:bg-yellow-600 transition-all shadow-md"
+                    >
+                      View
+                    </Link>
                   </div>
                 </td>
               </tr>

@@ -73,6 +73,8 @@ export const fetchHotels = async (
   }
 };
 
+
+
 export const login = async (
   data: userLogin,
   setLoading: React.Dispatch<React.SetStateAction<boolean>>,
@@ -223,4 +225,21 @@ export const logout = (router: any) => {
   Cookie.remove("token");
   Cookie.remove("role");
   router.push("/");
+};
+
+
+
+/* -------------------------------------------------------------------------------------------- */
+
+
+export const getSingleData = async (
+  endPoint: string
+
+) => {
+  try {
+    const response = await axios.get(`${API_URL}/${endPoint}`);
+    return response?.data
+  } catch (error) {
+    console.error("Failed to fetch reservations:", error);
+  }
 };

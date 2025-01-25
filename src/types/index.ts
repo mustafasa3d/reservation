@@ -8,6 +8,8 @@ export interface Reservation {
   checkOut: string;
   status: "pending" | "approved" | "cancelled";
   message?: string;
+  guests?: string;
+  roomType?: string;
 }
 
 export interface ReservationForm {

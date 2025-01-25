@@ -18,6 +18,12 @@ const initFormData = {
   roomType: "Single",
 };
 
+const roomTypesOptions = [
+  { value: "Single", label: "Single" },
+  { value: "Double", label: "Double" },
+  { value: "Suite", label: "Suite" },
+]
+
 const requiredFields = ["hotel", "username", "checkIn", "checkOut", "guests"];
 
 const ReservationForm = () => {
@@ -69,8 +75,9 @@ const ReservationForm = () => {
         name="username"
         value={formData.username}
         onChange={handleChange}
-        label="User Name"
         placeholder="User Name"
+        label="User Name"
+        className="text-black"
         required
       />
       <CustomInput
@@ -79,8 +86,9 @@ const ReservationForm = () => {
         value={formData.hotel}
         onChange={handleChange}
         label="Hotel"
-        isReactSelect
+        className="text-black"
         options={hotels}
+        isReactSelect
       />
       <div className="mb-6 flex gap-4">
         <CustomInput
@@ -89,6 +97,7 @@ const ReservationForm = () => {
           value={formData.checkIn}
           onChange={handleChange}
           label="Check-In"
+          className="text-black"
           required
         />
         <CustomInput
@@ -97,6 +106,7 @@ const ReservationForm = () => {
           value={formData.checkOut}
           onChange={handleChange}
           label="Check-Out"
+          className="text-black"
           required
         />
       </div>
@@ -106,6 +116,8 @@ const ReservationForm = () => {
         value={formData.guests}
         onChange={handleChange}
         label="Number of Guests"
+        min={1}
+        className="text-black"
         required
       />
       <CustomInput
@@ -114,12 +126,9 @@ const ReservationForm = () => {
         value={formData.roomType}
         onChange={handleChange}
         label="Room Type"
+        className="text-black"
+        options={roomTypesOptions}
         isReactSelect
-        options={[
-          { value: "Single", label: "Single" },
-          { value: "Double", label: "Double" },
-          { value: "Suite", label: "Suite" },
-        ]}
       />
 
       {error && (

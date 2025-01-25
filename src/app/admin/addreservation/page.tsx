@@ -1,7 +1,7 @@
-import ReservationForm from "@/components/ReservationForm";
 import Header from "@/components/Header";
+import ReservationForm from "@/components/ReservationForm";
 
-const Reservations = () => {
+const AddReservation = async () => {
   return (
     <div className="container mx-auto ">
       <Header
@@ -13,4 +13,4 @@ const Reservations = () => {
   );
 };
 
-export default Reservations;
+export default AddReservation;
