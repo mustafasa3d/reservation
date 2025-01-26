@@ -28,15 +28,14 @@ const ReservationForm = ({ from }: { from?: string }) => {
     "guests",
   ];
 
-  const initFormData =  {
-        hotel: "",
-        username: "",
-        checkIn: "",
-        checkOut: "",
-        guests: 1,
-        roomType: "Single",
-      }
-    
+  const initFormData = {
+    hotel: "",
+    username: "",
+    checkIn: "",
+    checkOut: "",
+    guests: 1,
+    roomType: "Single",
+  };
 
   const [formData, setFormData] = useState(initFormData);
   const [error, setError] = useState("");
@@ -157,11 +156,9 @@ const ReservationForm = ({ from }: { from?: string }) => {
         onClose={() => setShowPopup(false)}
         onAction={() => {
           if (isSuccess) {
-            if ( from === "user"){
+            if (from === "user") {
               router.push("/user");
-
             } else {
-
               router.push("/admin");
             }
           }

@@ -37,7 +37,7 @@ const Filters: React.FC<FiltersProps> = ({
             { value: "approved", label: "Approved" },
             { value: "cancelled", label: "Cancelled" },
           ]}
-          isReactSelect // استخدام react-select هنا
+          isReactSelect 
           placeholder="Select Status"
           className="text-black"
           label="Status"
@@ -72,7 +72,7 @@ const Filters: React.FC<FiltersProps> = ({
           value={tempFilters.hotelName}
           onChange={(e) => updateTempFilters("hotelName", e.target.value)}
           options={hotels}
-          isReactSelect // استخدام react-select هنا
+          isReactSelect
           placeholder="Select Hotel"
           className="text-black"
           label="Hotel"

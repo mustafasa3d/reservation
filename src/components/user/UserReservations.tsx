@@ -5,18 +5,17 @@ import {
   cancelReservation,
   fetchReservationsUser,
 } from "@/utils/api/user/services";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 import Cookie from "js-cookie";
 import Link from "next/link";
 import Loading from "../Loading";
 import { Reservation } from "@/types";
 import { logout } from "@/utils/api/commanService";
+import { useRouter } from "next/navigation";
 
 const UserReservations: React.FC = () => {
   const username = Cookie.get("username");
   const router = useRouter();
-  const pathname = usePathname();
 
   const [reservations, setReservations] = useState([] as Reservation[]);
   const [loading, setLoading] = useState(true);

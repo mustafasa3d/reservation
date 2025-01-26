@@ -1,15 +1,5 @@
-import {
-  Reservation,
-  ReservationForm,
-  hotel,
-  selectOption,
-  userData,
-  userLogin,
-} from "@/types";
-
-import Cookie from "js-cookie";
+import { Reservation } from "@/types";
 import axios from "../initAxios";
-import { logout } from "../commanService";
 
 export const fetchReservationsUser = async (
   username: "string",
@@ -31,7 +21,7 @@ export const fetchReservationsUser = async (
 export const cancelReservation = async (
   id: string,
   setReservations: React.Dispatch<React.SetStateAction<Reservation[]>>,
-  setLoading: React.Dispatch<React.SetStateAction<boolean>>,
+  setLoading: React.Dispatch<React.SetStateAction<boolean>>
 ) => {
   setLoading(true);
   try {

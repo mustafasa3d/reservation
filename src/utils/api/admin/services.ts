@@ -1,13 +1,4 @@
-import {
-  Reservation,
-  ReservationForm,
-  hotel,
-  selectOption,
-  userData,
-  userLogin,
-} from "@/types";
-
-import Cookie from "js-cookie";
+import { Reservation } from "@/types";
 import axios from "../initAxios";
 
 export const fetchReservationsAdmin = async (
@@ -29,9 +20,7 @@ export const fetchReservationsAdmin = async (
     /* if (filter?.startDate) params.append("checkIn", filter.startDate); */
     /* if (filter?.endDate) params.append("checkOut", filter.endDate); */
 
-    const response = await axios.get(
-      `/reservations?${params.toString()}`
-    );
+    const response = await axios.get(`/reservations?${params.toString()}`);
     setReservations(response.data);
   } catch (error) {
     console.error("Failed to fetch reservations:", error);
@@ -39,8 +28,6 @@ export const fetchReservationsAdmin = async (
     setLoading(false);
   }
 };
-
-
 
 /* (approve | cancel | delete) reservation */
 export const handleUpdateReservation = async (
@@ -64,10 +51,7 @@ export const handleUpdateReservation = async (
       /* if (status === 'cancelled' || status === 'approved') */
       const DataToUpdate = { status: status, message: message || null };
 
-      const data = await axios.patch(
-        `/reservations/${id}`,
-        DataToUpdate
-      );
+      const data = await axios.patch(`/reservations/${id}`, DataToUpdate);
 
       if (
         data?.data?.status === "cancelled" ||
@@ -90,6 +74,4 @@ export const handleUpdateReservation = async (
   }
 };
 
-
 /* -------------------------------------------------------------------------------------------- */
-

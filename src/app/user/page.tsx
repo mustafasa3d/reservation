@@ -4,11 +4,8 @@ import UserReservations from "@/components/user/UserReservations";
 async function page() {
   return (
     <>
-
-
-
       <Header
-        title={`Reservations`} 
+        title={`Reservations`}
         btnInfo={{ href: "/user/addreservation", text: "+ Add Reservation" }}
       />
 

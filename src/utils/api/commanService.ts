@@ -29,13 +29,11 @@ export const login = async (
       Cookie.set("role", user.role);
       Cookie.set("username", user.username);
 
-
-      
       if (user.role === "admin") {
         router.push("/admin");
       } else {
         console.log("hreeeeeeeee", user);
-        router.push("/user")
+        router.push("/user");
       }
     } else {
       setError("Invalid username or password");
@@ -67,7 +65,7 @@ export const createReservation = async (
   const missingFields = requiredFields.filter((field) => !formData[field]);
 
   if (missingFields.length > 0) {
-    setError("يرجى ملء جميع الحقول المطلوبة");
+    setError("Please fill in all the required fields");
     return;
   }
 
@@ -78,12 +76,12 @@ export const createReservation = async (
   const checkOutDate = new Date(formData.checkOut);
 
   if (checkInDate < today) {
-    setError("لا يمكن حجز تاريخ في الماضي");
+    setError("Cannot book a date in the past");
     return;
   }
 
   if (checkOutDate <= checkInDate) {
-    setError("يجب أن يكون تاريخ المغادرة بعد تاريخ الوصول");
+    setError("Check-out date must be after check-in date");
     return;
   }
 
@@ -100,11 +98,11 @@ export const createReservation = async (
       );
     }
 
-    setPopupMessage("تم الحجز بنجاح!");
+    setPopupMessage("Reservation created successfully!");
     setIsSuccess(true);
     setShowPopup(true);
   } catch (err) {
-    setPopupMessage("حدث خطأ أثناء الحجز. يرجى المحاولة مرة أخرى.");
+    setPopupMessage("An error occurred while booking. Please try again.");
     setIsSuccess(false);
     setShowPopup(true);
   } finally {
