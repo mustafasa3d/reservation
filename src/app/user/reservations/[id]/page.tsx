@@ -1,4 +1,3 @@
-import AdminDashboard from "@/components/admin/AdminDashboard";
 import Header from "@/components/Header";
 import SingleReservationView from "@/components/SingleReservationView";
 import { getSingleData } from "@/utils/api/commanService";
@@ -14,7 +13,7 @@ async function SingleReservation({ params }: Props) {
     <>
       <Header
         title={`Reservation id: ${id}`}
-        btnInfo={{ href: "/admin", text: "See All Reservations" }}
+        btnInfo={{ href: "/user", text: "See All Reservations" }}
       />
 
       <SingleReservationView reservation={reservationData} />

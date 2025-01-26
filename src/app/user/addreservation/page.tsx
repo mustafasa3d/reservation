@@ -6,7 +6,7 @@ const AddReservation = async () => {
     <div className="container mx-auto ">
       <Header
         title="Reservations"
-        btnInfo={{ href: "/admin", text: "See All Reservations" }}
+        btnInfo={{ href: "/user", text: "See All Reservations" }}
       />
       <ReservationForm from="user" />
     </div>

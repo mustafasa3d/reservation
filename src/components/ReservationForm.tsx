@@ -157,7 +157,13 @@ const ReservationForm = ({ from }: { from?: string }) => {
         onClose={() => setShowPopup(false)}
         onAction={() => {
           if (isSuccess) {
-            router.push("/admin");
+            if ( from === "user"){
+              router.push("/user");
+
+            } else {
+
+              router.push("/admin");
+            }
           }
           setShowPopup(false);
         }}
