@@ -60,7 +60,7 @@ const ReservationForm = ({ from }: { from?: string }) => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    formData.username = usernameFromCookie;
+    from === "user" ? (formData.username = usernameFromCookie) : null;
     await createReservation(
       /* @ts-ignore */
       formData,
